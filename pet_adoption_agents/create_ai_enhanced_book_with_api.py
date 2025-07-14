@@ -145,8 +145,8 @@ def get_openai_client() -> Optional[OpenAI]:
         print(f"❌ Error with OpenAI API key: {e}")
         return None
 
-async def generate_ai_image(client: OpenAI, pet: Dict, image_type: str, temp_dir: Path) -> Optional[Path]:
-    """Generate AI image using OpenAI's DALL-E"""
+async def generate_ai_image(client: OpenAI, pet: Dict, image_type: str, temp_dir: Path, original_photo_path: Optional[Path] = None) -> Optional[Path]:
+    """Generate AI image using OpenAI's DALL-E, optionally using the real pet photo as input"""
     if not client:
         return None
     
@@ -154,42 +154,87 @@ async def generate_ai_image(client: OpenAI, pet: Dict, image_type: str, temp_dir
     pet_type = pet.get('type', 'animal')
     description = pet.get('description', 'A wonderful pet')
     
+    # Get pet appearance details from description
+    appearance_keywords = []
+    if description:
+        desc_lower = description.lower()
+        # Extract color information
+        colors = ['black', 'white', 'brown', 'gray', 'grey', 'orange', 'tabby', 'calico', 'tortoiseshell', 'tuxedo', 'siamese', 'russian blue']
+        for color in colors:
+            if color in desc_lower:
+                appearance_keywords.append(color)
+    
+    # Get breed information
+    breed = pet.get('breeds', {}).get('primary', '')
+    if breed:
+        appearance_keywords.append(breed.lower())
+    
+    appearance_desc = f"This specific {pet_type.lower()} has {', '.join(appearance_keywords)} coloring" if appearance_keywords else f"This {pet_type.lower()}"
+    
     # Create different prompts based on image type
     if image_type == "enhanced":
-        prompt = f"""Create a beautiful, enhanced portrait of {pet_name}, a {pet_type}. 
-        Based on: {description}
+        prompt = f"""Create a beautiful, enhanced portrait of this specific {pet_type.lower()} named {pet_name}. 
+        {appearance_desc}. Based on description: {description}
         Style: High-quality digital art, vibrant colors, professional pet photography style, 
-        warm lighting, engaging and heartwarming. Perfect for a pet adoption book."""
+        warm lighting, engaging and heartwarming. Perfect for a pet adoption book.
+        Keep the pet's exact coloring, markings, and distinctive features."""
         
     elif image_type == "story":
-        prompt = f"""Create a whimsical, story-book illustration of {pet_name}, a {pet_type}, 
-        in an adventure scene. Based on: {description}
+        prompt = f"""Create a whimsical, story-book illustration of this specific {pet_type.lower()} named {pet_name} 
+        in an adventure scene. {appearance_desc}. Based on: {description}
         Style: Children's book illustration, colorful, engaging, magical elements, 
-        perfect for storytelling. Show the pet as a heroic character."""
+        perfect for storytelling. Show this pet as a heroic character.
+        Keep the pet's exact coloring, markings, and distinctive features."""
         
     elif image_type == "ghibli":
-        prompt = f"""Create a Studio Ghibli-style illustration of {pet_name}, a {pet_type}. 
-        Based on: {description}
+        prompt = f"""Create a Studio Ghibli-style illustration of this specific {pet_type.lower()} named {pet_name}. 
+        {appearance_desc}. Based on: {description}
         Style: Studio Ghibli animation aesthetic, soft watercolor textures, dreamy lighting, 
         magical atmosphere, gentle colors, ethereal quality, whimsical and heartwarming. 
-        Set in a magical forest or countryside."""
+        Set in a magical forest or countryside.
+        Keep the pet's exact coloring, markings, and distinctive features."""
     
     else:
-        prompt = f"A beautiful portrait of {pet_name}, a {pet_type}. {description}"
+        prompt = f"A beautiful portrait of this specific {pet_type.lower()} named {pet_name}. {appearance_desc}. {description}"
     
     try:
         print(f"🎨 Generating {image_type} image for {pet_name}...")
-        response = client.images.generate(
-            model="dall-e-3",
-            prompt=prompt,
-            n=1,
-            size="1024x1024",
-            quality="hd"
-        )
+        
+        # If we have the original photo, try to use it as reference (image variation)
+        if original_photo_path and original_photo_path.exists():
+            try:
+                # Read the original image file
+                with open(original_photo_path, 'rb') as image_file:
+                    # Use image variation to create similar-looking pet
+                    response = client.images.create_variation(
+                        image=image_file,
+                        n=1,
+                        size="1024x1024"
+                    )
+                    print(f"✅ Created variation based on original photo for {pet_name}")
+            except Exception as variation_error:
+                print(f"⚠️  Image variation failed for {pet_name}, using text generation: {variation_error}")
+                # Fall back to text-based generation
+                response = client.images.generate(
+                    model="dall-e-3",
+                    prompt=prompt,
+                    n=1,
+                    size="1024x1024",
+                    quality="hd"
+                )
+        else:
+            # Use text-based generation with detailed appearance description
+            response = client.images.generate(
+                model="dall-e-3",
+                prompt=prompt,
+                n=1,
+                size="1024x1024",
+                quality="hd"
+            )
         
         # Download the generated image
         image_url = response.data[0].url
-        filename = f"{pet_name.lower().replace(' ', '_')}_{image_type}.png"
+        filename = f"{pet_name.lower().replace(' ', '_').replace('*', '')}_{image_type}.png"
         
         return download_image(image_url, filename, temp_dir)
         
@@ -325,7 +370,7 @@ async def create_enhanced_pdf(pets: List[Dict], output_dir: Path, temp_dir: Path
         # AI-Enhanced Creative Image Section
         story.append(Paragraph("■ AI-Enhanced Creative Image", section_style))
         if openai_client:
-            enhanced_image_path = await generate_ai_image(openai_client, pet, "enhanced", temp_dir)
+            enhanced_image_path = await generate_ai_image(openai_client, pet, "enhanced", temp_dir, original_photo_path)
             if enhanced_image_path and enhanced_image_path.exists():
                 try:
                     img = Image(str(enhanced_image_path), width=3*inch, height=3*inch)
@@ -344,7 +389,7 @@ async def create_enhanced_pdf(pets: List[Dict], output_dir: Path, temp_dir: Path
         # Story-Specific AI Image Section
         story.append(Paragraph("■ Story-Specific AI Image", section_style))
         if openai_client:
-            story_image_path = await generate_ai_image(openai_client, pet, "story", temp_dir)
+            story_image_path = await generate_ai_image(openai_client, pet, "story", temp_dir, original_photo_path)
             if story_image_path and story_image_path.exists():
                 try:
                     img = Image(str(story_image_path), width=3*inch, height=3*inch)
@@ -363,7 +408,7 @@ async def create_enhanced_pdf(pets: List[Dict], output_dir: Path, temp_dir: Path
         # Ghibli-Style AI Image Section
         story.append(Paragraph("■ Ghibli-Style AI Image", section_style))
         if openai_client:
-            ghibli_image_path = await generate_ai_image(openai_client, pet, "ghibli", temp_dir)
+            ghibli_image_path = await generate_ai_image(openai_client, pet, "ghibli", temp_dir, original_photo_path)
             if ghibli_image_path and ghibli_image_path.exists():
                 try:
                     img = Image(str(ghibli_image_path), width=3*inch, height=3*inch)

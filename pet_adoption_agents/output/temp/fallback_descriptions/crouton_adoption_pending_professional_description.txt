@@ -1,0 +1,11 @@
+
+PROFESSIONAL PORTRAIT OF CROUTON *ADOPTION PENDING*
+
+Physical Description: Unable to analyze photo - Error code: 429 - {'error': {'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.', 'type': 'insufficient_quota', 'param': None, 'code': 'insufficient_quota'}}
+
+Facial Features: Analysis failed
+
+Recommended Image Generation Prompt:
+Professional portrait of Crouton *Adoption Pending*, a Dog
+
+Style Notes: High-quality digital art, professional pet photography style, warm lighting, engaging and heartwarming.

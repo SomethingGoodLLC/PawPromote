@@ -1,0 +1,584 @@
+{
+  "generation_timestamp": "2025-07-14T08:11:33.223245",
+  "analysis_method": "Manual photo analysis with enhanced prompts",
+  "pets": [
+    {
+      "name": "Pepper",
+      "original_data": {
+        "id": 76247650,
+        "organization_id": "VA935",
+        "url": "https://www.petfinder.com/cat/pepper-76247650/va/alexandria/marlees-misfits-va935/?referrer_id=41bf5875-18ad-4831-b3b5-3cace1f4568f&utm_source=api&utm_medium=partnership&utm_content=41bf5875-18ad-4831-b3b5-3cace1f4568f",
+        "type": "Cat",
+        "species": "Cat",
+        "breeds": {
+          "primary": "Domestic Short Hair",
+          "secondary": null,
+          "mixed": false,
+          "unknown": false
+        },
+        "colors": {
+          "primary": "Black",
+          "secondary": null,
+          "tertiary": null
+        },
+        "age": "Adult",
+        "gender": "Female",
+        "size": "Medium",
+        "coat": "Short",
+        "attributes": {
+          "spayed_neutered": true,
+          "house_trained": false,
+          "declawed": false,
+          "special_needs": false,
+          "shots_current": true
+        },
+        "environment": {
+          "children": false,
+          "dogs": false,
+          "cats": true
+        },
+        "tags": [
+          "Independent",
+          "Quiet",
+          "Shy"
+        ],
+        "name": "Pepper",
+        "description": "My name is Pepper and I was a feral kitetn when I found my way to the shelter. I prefer...",
+        "organization_animal_id": null,
+        "photos": [
+          {
+            "small": "https://dbw3zep4prcju.cloudfront.net/animal/feb69ed1-9d0c-43a0-8a14-a2b007c512a5/image/7dd11c27-b1ec-4340-a9cb-26ac70ba50a4.jpg?versionId=u4GXUakzX12kfngo9TMHgKL4FoQqdZmV&bust=1746224948&width=100",
+            "medium": "https://dbw3zep4prcju.cloudfront.net/animal/feb69ed1-9d0c-43a0-8a14-a2b007c512a5/image/7dd11c27-b1ec-4340-a9cb-26ac70ba50a4.jpg?versionId=u4GXUakzX12kfngo9TMHgKL4FoQqdZmV&bust=1746224948&width=300",
+            "large": "https://dbw3zep4prcju.cloudfront.net/animal/feb69ed1-9d0c-43a0-8a14-a2b007c512a5/image/7dd11c27-b1ec-4340-a9cb-26ac70ba50a4.jpg?versionId=u4GXUakzX12kfngo9TMHgKL4FoQqdZmV&bust=1746224948&width=600",
+            "full": "https://dbw3zep4prcju.cloudfront.net/animal/feb69ed1-9d0c-43a0-8a14-a2b007c512a5/image/7dd11c27-b1ec-4340-a9cb-26ac70ba50a4.jpg?versionId=u4GXUakzX12kfngo9TMHgKL4FoQqdZmV&bust=1746224948"
+          },
+          {
+            "small": "https://dbw3zep4prcju.cloudfront.net/animal/feb69ed1-9d0c-43a0-8a14-a2b007c512a5/image/29f788a4-123a-4d17-a372-18a556c4fae8.jpg?versionId=KqEuTAADNTT6d9B69kcvlSILT8nKZ52Q&bust=1746224948&width=100",
+            "medium": "https://dbw3zep4prcju.cloudfront.net/animal/feb69ed1-9d0c-43a0-8a14-a2b007c512a5/image/29f788a4-123a-4d17-a372-18a556c4fae8.jpg?versionId=KqEuTAADNTT6d9B69kcvlSILT8nKZ52Q&bust=1746224948&width=300",
+            "large": "https://dbw3zep4prcju.cloudfront.net/animal/feb69ed1-9d0c-43a0-8a14-a2b007c512a5/image/29f788a4-123a-4d17-a372-18a556c4fae8.jpg?versionId=KqEuTAADNTT6d9B69kcvlSILT8nKZ52Q&bust=1746224948&width=600",
+            "full": "https://dbw3zep4prcju.cloudfront.net/animal/feb69ed1-9d0c-43a0-8a14-a2b007c512a5/image/29f788a4-123a-4d17-a372-18a556c4fae8.jpg?versionId=KqEuTAADNTT6d9B69kcvlSILT8nKZ52Q&bust=1746224948"
+          }
+        ],
+        "primary_photo_cropped": {
+          "small": "https://dbw3zep4prcju.cloudfront.net/animal/feb69ed1-9d0c-43a0-8a14-a2b007c512a5/image/7dd11c27-b1ec-4340-a9cb-26ac70ba50a4.jpg?versionId=u4GXUakzX12kfngo9TMHgKL4FoQqdZmV&bust=1746224948&width=300",
+          "medium": "https://dbw3zep4prcju.cloudfront.net/animal/feb69ed1-9d0c-43a0-8a14-a2b007c512a5/image/7dd11c27-b1ec-4340-a9cb-26ac70ba50a4.jpg?versionId=u4GXUakzX12kfngo9TMHgKL4FoQqdZmV&bust=1746224948&width=450",
+          "large": "https://dbw3zep4prcju.cloudfront.net/animal/feb69ed1-9d0c-43a0-8a14-a2b007c512a5/image/7dd11c27-b1ec-4340-a9cb-26ac70ba50a4.jpg?versionId=u4GXUakzX12kfngo9TMHgKL4FoQqdZmV&bust=1746224948&width=600",
+          "full": "https://dbw3zep4prcju.cloudfront.net/animal/feb69ed1-9d0c-43a0-8a14-a2b007c512a5/image/7dd11c27-b1ec-4340-a9cb-26ac70ba50a4.jpg?versionId=u4GXUakzX12kfngo9TMHgKL4FoQqdZmV&bust=1746224948"
+        },
+        "videos": [],
+        "status": "adoptable",
+        "status_changed_at": "2025-05-02T22:40:27+0000",
+        "published_at": "2025-05-02T22:40:26+0000",
+        "distance": 0.138,
+        "contact": {
+          "email": "marleesmisfits@gmail.com",
+          "phone": null,
+          "address": {
+            "address1": "109 S Alfred St",
+            "address2": null,
+            "city": "Alexandria",
+            "state": "VA",
+            "postcode": "22314",
+            "country": "US"
+          }
+        },
+        "_links": {
+          "self": {
+            "href": "/v2/animals/76247650"
+          },
+          "type": {
+            "href": "/v2/types/cat"
+          },
+          "organization": {
+            "href": "/v2/organizations/va935"
+          }
+        }
+      },
+      "detailed_photo_analysis": {
+        "physical_description": "Small black domestic short hair cat with bright golden-yellow eyes. Sleek, solid black coat with no visible markings. Compact build typical of domestic short hair breed. Alert expression with slightly pointed ears.",
+        "facial_features": "Striking bright golden/amber eyes that are large and expressive. Small pink nose. Alert, upright ears. Whiskers are white/light colored against the black fur. Sweet, slightly cautious expression.",
+        "pose_and_setting": "Sitting inside a circular shelter hideaway/tube, peering out with an alert but calm demeanor. Shelter environment visible in background. Good lighting shows the cat's features clearly.",
+        "personality_indicators": "Alert and observant but not fearful. Comfortable in shelter environment. The way Pepper is positioned suggests curiosity mixed with a bit of shyness - typical of a former feral kitten who has learned to trust.",
+        "distinctive_features": "Solid black coat, bright golden eyes, compact size, alert expression"
+      },
+      "enhanced_prompts": {
+        "professional": "Create a professional portrait of Pepper, a small black domestic short hair cat with striking bright golden-amber eyes. Solid jet-black coat with no markings, compact build, alert pointed ears, and white whiskers. The cat has an intelligent, slightly cautious but sweet expression. Professional pet photography style with warm lighting that highlights the golden eyes against the black fur. High-quality digital art, engaging and heartwarming.",
+        "storybook": "Create a whimsical storybook illustration of Pepper, a small black cat with magical golden eyes, on a detective adventure. Show Pepper as a clever feline detective with a magnifying glass, wearing a tiny detective hat. The cat should have a solid black coat, bright golden eyes, and an intelligent expression. Set in a cozy library or study filled with mystery books and clues. Children's book illustration style, colorful and engaging.",
+        "ghibli": "Create a Studio Ghibli-style illustration of Pepper, a small black cat with mystical golden eyes, in an enchanted forest setting. The cat should have a solid black coat that seems to shimmer with magic, bright golden eyes that glow softly, and an wise, ancient expression. Surround with floating spirits, magical fireflies, and soft moonlight filtering through trees. Studio Ghibli animation aesthetic with soft watercolor textures and dreamy lighting."
+      }
+    },
+    {
+      "name": "Winnie",
+      "original_data": {
+        "id": 75992220,
+        "organization_id": "VA935",
+        "url": "https://www.petfinder.com/cat/winnie-75992220/va/alexandria/marlees-misfits-va935/?referrer_id=41bf5875-18ad-4831-b3b5-3cace1f4568f&utm_source=api&utm_medium=partnership&utm_content=41bf5875-18ad-4831-b3b5-3cace1f4568f",
+        "type": "Cat",
+        "species": "Cat",
+        "breeds": {
+          "primary": "Russian Blue",
+          "secondary": null,
+          "mixed": false,
+          "unknown": false
+        },
+        "colors": {
+          "primary": "Gray / Blue / Silver",
+          "secondary": null,
+          "tertiary": null
+        },
+        "age": "Senior",
+        "gender": "Female",
+        "size": "Medium",
+        "coat": "Short",
+        "attributes": {
+          "spayed_neutered": true,
+          "house_trained": true,
+          "declawed": false,
+          "special_needs": false,
+          "shots_current": true
+        },
+        "environment": {
+          "children": null,
+          "dogs": false,
+          "cats": true
+        },
+        "tags": [
+          "Dignified",
+          "Gentle",
+          "Loyal",
+          "Quiet",
+          "Sweet"
+        ],
+        "name": "Winnie",
+        "description": "My name is Winnie and I am looking for a retirement home. I love pets and I am very sweet....",
+        "organization_animal_id": null,
+        "photos": [
+          {
+            "small": "https://dbw3zep4prcju.cloudfront.net/animal/872f83e4-b738-4d30-90af-e38226ef79c5/image/1a1feff7-ee0f-40c3-aafe-250c94d93636.jpg?versionId=iy0GyAlKKfoVL3i4JPGGPjX0hikd5gUl&bust=1744395473&width=100",
+            "medium": "https://dbw3zep4prcju.cloudfront.net/animal/872f83e4-b738-4d30-90af-e38226ef79c5/image/1a1feff7-ee0f-40c3-aafe-250c94d93636.jpg?versionId=iy0GyAlKKfoVL3i4JPGGPjX0hikd5gUl&bust=1744395473&width=300",
+            "large": "https://dbw3zep4prcju.cloudfront.net/animal/872f83e4-b738-4d30-90af-e38226ef79c5/image/1a1feff7-ee0f-40c3-aafe-250c94d93636.jpg?versionId=iy0GyAlKKfoVL3i4JPGGPjX0hikd5gUl&bust=1744395473&width=600",
+            "full": "https://dbw3zep4prcju.cloudfront.net/animal/872f83e4-b738-4d30-90af-e38226ef79c5/image/1a1feff7-ee0f-40c3-aafe-250c94d93636.jpg?versionId=iy0GyAlKKfoVL3i4JPGGPjX0hikd5gUl&bust=1744395473"
+          },
+          {
+            "small": "https://dbw3zep4prcju.cloudfront.net/animal/872f83e4-b738-4d30-90af-e38226ef79c5/image/760f62d9-5084-4359-9847-29129f7d99ab.jpg?versionId=HK3ReZhF58k6dMoaqukqI84SaAHs2pj2&bust=1745863023&width=100",
+            "medium": "https://dbw3zep4prcju.cloudfront.net/animal/872f83e4-b738-4d30-90af-e38226ef79c5/image/760f62d9-5084-4359-9847-29129f7d99ab.jpg?versionId=HK3ReZhF58k6dMoaqukqI84SaAHs2pj2&bust=1745863023&width=300",
+            "large": "https://dbw3zep4prcju.cloudfront.net/animal/872f83e4-b738-4d30-90af-e38226ef79c5/image/760f62d9-5084-4359-9847-29129f7d99ab.jpg?versionId=HK3ReZhF58k6dMoaqukqI84SaAHs2pj2&bust=1745863023&width=600",
+            "full": "https://dbw3zep4prcju.cloudfront.net/animal/872f83e4-b738-4d30-90af-e38226ef79c5/image/760f62d9-5084-4359-9847-29129f7d99ab.jpg?versionId=HK3ReZhF58k6dMoaqukqI84SaAHs2pj2&bust=1745863023"
+          },
+          {
+            "small": "https://dbw3zep4prcju.cloudfront.net/animal/872f83e4-b738-4d30-90af-e38226ef79c5/image/5e1e6146-8ff7-4487-9acc-ed475209cc08.jpg?versionId=OOksUBTBqRxMgHh9BcTBgEH1VVRedGbK&bust=1745863023&width=100",
+            "medium": "https://dbw3zep4prcju.cloudfront.net/animal/872f83e4-b738-4d30-90af-e38226ef79c5/image/5e1e6146-8ff7-4487-9acc-ed475209cc08.jpg?versionId=OOksUBTBqRxMgHh9BcTBgEH1VVRedGbK&bust=1745863023&width=300",
+            "large": "https://dbw3zep4prcju.cloudfront.net/animal/872f83e4-b738-4d30-90af-e38226ef79c5/image/5e1e6146-8ff7-4487-9acc-ed475209cc08.jpg?versionId=OOksUBTBqRxMgHh9BcTBgEH1VVRedGbK&bust=1745863023&width=600",
+            "full": "https://dbw3zep4prcju.cloudfront.net/animal/872f83e4-b738-4d30-90af-e38226ef79c5/image/5e1e6146-8ff7-4487-9acc-ed475209cc08.jpg?versionId=OOksUBTBqRxMgHh9BcTBgEH1VVRedGbK&bust=1745863023"
+          }
+        ],
+        "primary_photo_cropped": {
+          "small": "https://dbw3zep4prcju.cloudfront.net/animal/872f83e4-b738-4d30-90af-e38226ef79c5/image/1a1feff7-ee0f-40c3-aafe-250c94d93636.jpg?versionId=iy0GyAlKKfoVL3i4JPGGPjX0hikd5gUl&bust=1744395473&width=300",
+          "medium": "https://dbw3zep4prcju.cloudfront.net/animal/872f83e4-b738-4d30-90af-e38226ef79c5/image/1a1feff7-ee0f-40c3-aafe-250c94d93636.jpg?versionId=iy0GyAlKKfoVL3i4JPGGPjX0hikd5gUl&bust=1744395473&width=450",
+          "large": "https://dbw3zep4prcju.cloudfront.net/animal/872f83e4-b738-4d30-90af-e38226ef79c5/image/1a1feff7-ee0f-40c3-aafe-250c94d93636.jpg?versionId=iy0GyAlKKfoVL3i4JPGGPjX0hikd5gUl&bust=1744395473&width=600",
+          "full": "https://dbw3zep4prcju.cloudfront.net/animal/872f83e4-b738-4d30-90af-e38226ef79c5/image/1a1feff7-ee0f-40c3-aafe-250c94d93636.jpg?versionId=iy0GyAlKKfoVL3i4JPGGPjX0hikd5gUl&bust=1744395473"
+        },
+        "videos": [],
+        "status": "adoptable",
+        "status_changed_at": "2025-04-11T18:20:08+0000",
+        "published_at": "2025-04-11T18:20:06+0000",
+        "distance": 0.138,
+        "contact": {
+          "email": "marleesmisfits@gmail.com",
+          "phone": null,
+          "address": {
+            "address1": "109 S Alfred St",
+            "address2": null,
+            "city": "Alexandria",
+            "state": "VA",
+            "postcode": "22314",
+            "country": "US"
+          }
+        },
+        "_links": {
+          "self": {
+            "href": "/v2/animals/75992220"
+          },
+          "type": {
+            "href": "/v2/types/cat"
+          },
+          "organization": {
+            "href": "/v2/organizations/va935"
+          }
+        }
+      },
+      "detailed_photo_analysis": {
+        "physical_description": "Beautiful Russian Blue cat with distinctive blue-gray coat and bright green eyes. Medium-sized build with the characteristic plush, dense coat of the breed. Alert ears and elegant facial structure typical of Russian Blues.",
+        "facial_features": "Striking bright green eyes that are large and expressive. The classic Russian Blue facial structure with a slightly rounded head and alert, well-spaced ears. Pink nose and delicate whiskers.",
+        "pose_and_setting": "Sitting in a pet carrier, looking directly at the camera with an alert, intelligent expression. The lighting shows the beautiful blue-gray coat coloring clearly.",
+        "personality_indicators": "Alert and intelligent expression. Appears calm and composed despite being in a carrier, suggesting a confident and adaptable personality. The direct gaze shows engagement and curiosity.",
+        "distinctive_features": "Russian Blue breed characteristics: blue-gray coat, bright green eyes, plush fur texture, elegant build"
+      },
+      "enhanced_prompts": {
+        "professional": "Create a professional portrait of Winnie, a beautiful Russian Blue cat with a distinctive blue-gray plush coat and striking bright green eyes. Medium-sized build with the elegant bone structure typical of Russian Blues. Alert, well-spaced ears and a slightly rounded head. The cat has an intelligent, calm expression. Professional pet photography style with lighting that highlights the unique blue-gray coat and bright green eyes.",
+        "storybook": "Create a whimsical storybook illustration of Winnie, a Russian Blue cat with magical green eyes, as a wise wizard's familiar. Show Winnie with a blue-gray coat and bright green eyes, sitting next to spell books and magical potions. The cat should wear a tiny wizard hat and be surrounded by glowing magical symbols. Children's book illustration style with mystical elements and warm colors.",
+        "ghibli": "Create a Studio Ghibli-style illustration of Winnie, a Russian Blue cat with mystical green eyes, in a magical castle setting. The cat should have a beautiful blue-gray coat that seems to shimmer with starlight, bright emerald green eyes, and a wise, serene expression. Set in a moonlit castle window with magical crystals and floating lights. Studio Ghibli animation aesthetic with ethereal lighting and soft textures."
+      }
+    },
+    {
+      "name": "Zebra",
+      "original_data": {
+        "id": 75816540,
+        "organization_id": "VA935",
+        "url": "https://www.petfinder.com/cat/zebra-75816540/va/alexandria/marlees-misfits-va935/?referrer_id=41bf5875-18ad-4831-b3b5-3cace1f4568f&utm_source=api&utm_medium=partnership&utm_content=41bf5875-18ad-4831-b3b5-3cace1f4568f",
+        "type": "Cat",
+        "species": "Cat",
+        "breeds": {
+          "primary": "Domestic Short Hair",
+          "secondary": null,
+          "mixed": false,
+          "unknown": false
+        },
+        "colors": {
+          "primary": "Black & White / Tuxedo",
+          "secondary": null,
+          "tertiary": null
+        },
+        "age": "Adult",
+        "gender": "Male",
+        "size": "Medium",
+        "coat": "Short",
+        "attributes": {
+          "spayed_neutered": true,
+          "house_trained": true,
+          "declawed": false,
+          "special_needs": false,
+          "shots_current": true
+        },
+        "environment": {
+          "children": true,
+          "dogs": null,
+          "cats": true
+        },
+        "tags": [
+          "Affectionate",
+          "Brave",
+          "Friendly",
+          "Loves",
+          "Playful"
+        ],
+        "name": "Zebra",
+        "description": "ZEBRA was surrendered with other cats in NC. He LOVES attention and will be the first to jump into an...",
+        "organization_animal_id": null,
+        "photos": [
+          {
+            "small": "https://dbw3zep4prcju.cloudfront.net/animal/b2b6c4b5-27f4-46b9-8dca-9f0dc646f1a5/image/3223bbe4-7f91-4810-b51e-61876a92c43c.jpg?versionId=IFffYPSMvJ8MFQWhUlu5cD0qWyFERPdp&bust=1743108405&width=100",
+            "medium": "https://dbw3zep4prcju.cloudfront.net/animal/b2b6c4b5-27f4-46b9-8dca-9f0dc646f1a5/image/3223bbe4-7f91-4810-b51e-61876a92c43c.jpg?versionId=IFffYPSMvJ8MFQWhUlu5cD0qWyFERPdp&bust=1743108405&width=300",
+            "large": "https://dbw3zep4prcju.cloudfront.net/animal/b2b6c4b5-27f4-46b9-8dca-9f0dc646f1a5/image/3223bbe4-7f91-4810-b51e-61876a92c43c.jpg?versionId=IFffYPSMvJ8MFQWhUlu5cD0qWyFERPdp&bust=1743108405&width=600",
+            "full": "https://dbw3zep4prcju.cloudfront.net/animal/b2b6c4b5-27f4-46b9-8dca-9f0dc646f1a5/image/3223bbe4-7f91-4810-b51e-61876a92c43c.jpg?versionId=IFffYPSMvJ8MFQWhUlu5cD0qWyFERPdp&bust=1743108405"
+          }
+        ],
+        "primary_photo_cropped": {
+          "small": "https://dbw3zep4prcju.cloudfront.net/animal/b2b6c4b5-27f4-46b9-8dca-9f0dc646f1a5/image/3223bbe4-7f91-4810-b51e-61876a92c43c.jpg?versionId=IFffYPSMvJ8MFQWhUlu5cD0qWyFERPdp&bust=1743108405&width=300",
+          "medium": "https://dbw3zep4prcju.cloudfront.net/animal/b2b6c4b5-27f4-46b9-8dca-9f0dc646f1a5/image/3223bbe4-7f91-4810-b51e-61876a92c43c.jpg?versionId=IFffYPSMvJ8MFQWhUlu5cD0qWyFERPdp&bust=1743108405&width=450",
+          "large": "https://dbw3zep4prcju.cloudfront.net/animal/b2b6c4b5-27f4-46b9-8dca-9f0dc646f1a5/image/3223bbe4-7f91-4810-b51e-61876a92c43c.jpg?versionId=IFffYPSMvJ8MFQWhUlu5cD0qWyFERPdp&bust=1743108405&width=600",
+          "full": "https://dbw3zep4prcju.cloudfront.net/animal/b2b6c4b5-27f4-46b9-8dca-9f0dc646f1a5/image/3223bbe4-7f91-4810-b51e-61876a92c43c.jpg?versionId=IFffYPSMvJ8MFQWhUlu5cD0qWyFERPdp&bust=1743108405"
+        },
+        "videos": [],
+        "status": "adoptable",
+        "status_changed_at": "2025-03-27T20:48:24+0000",
+        "published_at": "2025-03-27T20:48:23+0000",
+        "distance": 0.138,
+        "contact": {
+          "email": "marleesmisfits@gmail.com",
+          "phone": null,
+          "address": {
+            "address1": "109 S Alfred St",
+            "address2": null,
+            "city": "Alexandria",
+            "state": "VA",
+            "postcode": "22314",
+            "country": "US"
+          }
+        },
+        "_links": {
+          "self": {
+            "href": "/v2/animals/75816540"
+          },
+          "type": {
+            "href": "/v2/types/cat"
+          },
+          "organization": {
+            "href": "/v2/organizations/va935"
+          }
+        }
+      },
+      "detailed_photo_analysis": {
+        "physical_description": "Domestic short hair cat with distinctive black and white markings. Primarily white coat with black patches, giving a tuxedo-like appearance. Medium-sized build with alert ears and bright eyes.",
+        "facial_features": "Bright, expressive eyes and a pink nose. The black and white facial markings create an interesting pattern. Alert, upright ears and white whiskers.",
+        "pose_and_setting": "Alert and attentive pose, looking directly at the camera. The lighting clearly shows the contrast between the black and white markings.",
+        "personality_indicators": "Alert and engaging expression. The direct gaze and upright posture suggest confidence and curiosity. Appears social and interested in interaction.",
+        "distinctive_features": "Black and white tuxedo markings, bright eyes, alert expression, medium build"
+      },
+      "enhanced_prompts": {
+        "professional": "Create a professional portrait of Zebra, a domestic short hair cat with distinctive black and white tuxedo markings. Primarily white coat with black patches, bright expressive eyes, and alert upright ears. The cat has a confident, engaging expression. Professional pet photography style with lighting that emphasizes the beautiful contrast of the black and white markings.",
+        "storybook": "Create a whimsical storybook illustration of Zebra, a black and white tuxedo cat, as a dapper gentleman adventurer. Show Zebra wearing a tiny bow tie and top hat, with the natural tuxedo markings enhanced by the formal wear. The cat should be on a grand adventure, perhaps exploring a mysterious mansion. Children's book illustration style with elegant and playful elements.",
+        "ghibli": "Create a Studio Ghibli-style illustration of Zebra, a black and white tuxedo cat, in a magical garden setting. The cat should have distinctive black and white markings that seem to flow like ink and snow, bright eyes, and a noble expression. Surround with magical flowers that bloom in black and white, with soft petals floating in the air. Studio Ghibli animation aesthetic with gentle, dreamy lighting."
+      }
+    },
+    {
+      "name": "Rebekah",
+      "original_data": {
+        "id": 76738666,
+        "organization_id": "VA600",
+        "url": "https://www.petfinder.com/dog/rebekah-76738666/va/alexandria/operation-paws-for-homes-va600/?referrer_id=41bf5875-18ad-4831-b3b5-3cace1f4568f&utm_source=api&utm_medium=partnership&utm_content=41bf5875-18ad-4831-b3b5-3cace1f4568f",
+        "type": "Dog",
+        "species": "Dog",
+        "breeds": {
+          "primary": "German Shepherd Dog",
+          "secondary": "Mixed Breed",
+          "mixed": true,
+          "unknown": false
+        },
+        "colors": {
+          "primary": "Black",
+          "secondary": "White / Cream",
+          "tertiary": null
+        },
+        "age": "Adult",
+        "gender": "Female",
+        "size": "Medium",
+        "coat": null,
+        "attributes": {
+          "spayed_neutered": true,
+          "house_trained": true,
+          "declawed": null,
+          "special_needs": false,
+          "shots_current": true
+        },
+        "environment": {
+          "children": true,
+          "dogs": false,
+          "cats": false
+        },
+        "tags": [
+          "Crate trained in foster home",
+          "Not Good with Cats",
+          "Single Dog Home",
+          "Good with Kids"
+        ],
+        "name": "Rebekah",
+        "description": "Adoption Fee Covered + Free Training! Great news! Rebekah&#039;s adoption fee has been fully covered by a generous supporter, and...",
+        "organization_animal_id": null,
+        "photos": [
+          {
+            "small": "https://dl5zpyw5k3jeb.cloudfront.net/photos/pets/76738666/1/?bust=1750165552&width=100",
+            "medium": "https://dl5zpyw5k3jeb.cloudfront.net/photos/pets/76738666/1/?bust=1750165552&width=300",
+            "large": "https://dl5zpyw5k3jeb.cloudfront.net/photos/pets/76738666/1/?bust=1750165552&width=600",
+            "full": "https://dl5zpyw5k3jeb.cloudfront.net/photos/pets/76738666/1/?bust=1750165552"
+          },
+          {
+            "small": "https://dl5zpyw5k3jeb.cloudfront.net/photos/pets/76738666/2/?bust=1750245381&width=100",
+            "medium": "https://dl5zpyw5k3jeb.cloudfront.net/photos/pets/76738666/2/?bust=1750245381&width=300",
+            "large": "https://dl5zpyw5k3jeb.cloudfront.net/photos/pets/76738666/2/?bust=1750245381&width=600",
+            "full": "https://dl5zpyw5k3jeb.cloudfront.net/photos/pets/76738666/2/?bust=1750245381"
+          },
+          {
+            "small": "https://dl5zpyw5k3jeb.cloudfront.net/photos/pets/76738666/3/?bust=1750245380&width=100",
+            "medium": "https://dl5zpyw5k3jeb.cloudfront.net/photos/pets/76738666/3/?bust=1750245380&width=300",
+            "large": "https://dl5zpyw5k3jeb.cloudfront.net/photos/pets/76738666/3/?bust=1750245380&width=600",
+            "full": "https://dl5zpyw5k3jeb.cloudfront.net/photos/pets/76738666/3/?bust=1750245380"
+          },
+          {
+            "small": "https://dl5zpyw5k3jeb.cloudfront.net/photos/pets/76738666/4/?bust=1750245379&width=100",
+            "medium": "https://dl5zpyw5k3jeb.cloudfront.net/photos/pets/76738666/4/?bust=1750245379&width=300",
+            "large": "https://dl5zpyw5k3jeb.cloudfront.net/photos/pets/76738666/4/?bust=1750245379&width=600",
+            "full": "https://dl5zpyw5k3jeb.cloudfront.net/photos/pets/76738666/4/?bust=1750245379"
+          },
+          {
+            "small": "https://dl5zpyw5k3jeb.cloudfront.net/photos/pets/76738666/5/?bust=1750245380&width=100",
+            "medium": "https://dl5zpyw5k3jeb.cloudfront.net/photos/pets/76738666/5/?bust=1750245380&width=300",
+            "large": "https://dl5zpyw5k3jeb.cloudfront.net/photos/pets/76738666/5/?bust=1750245380&width=600",
+            "full": "https://dl5zpyw5k3jeb.cloudfront.net/photos/pets/76738666/5/?bust=1750245380"
+          },
+          {
+            "small": "https://dl5zpyw5k3jeb.cloudfront.net/photos/pets/76738666/6/?bust=1750245380&width=100",
+            "medium": "https://dl5zpyw5k3jeb.cloudfront.net/photos/pets/76738666/6/?bust=1750245380&width=300",
+            "large": "https://dl5zpyw5k3jeb.cloudfront.net/photos/pets/76738666/6/?bust=1750245380&width=600",
+            "full": "https://dl5zpyw5k3jeb.cloudfront.net/photos/pets/76738666/6/?bust=1750245380"
+          }
+        ],
+        "primary_photo_cropped": {
+          "small": "https://dl5zpyw5k3jeb.cloudfront.net/photos/pets/76738666/1/?bust=1750165552&width=300",
+          "medium": "https://dl5zpyw5k3jeb.cloudfront.net/photos/pets/76738666/1/?bust=1750165552&width=450",
+          "large": "https://dl5zpyw5k3jeb.cloudfront.net/photos/pets/76738666/1/?bust=1750165552&width=600",
+          "full": "https://dl5zpyw5k3jeb.cloudfront.net/photos/pets/76738666/1/?bust=1750165552"
+        },
+        "videos": [],
+        "status": "adoptable",
+        "status_changed_at": "2025-06-07T10:21:10+0000",
+        "published_at": "2025-06-07T10:21:03+0000",
+        "distance": 0.1891,
+        "contact": {
+          "email": "adopt@ophrescue.org",
+          "phone": null,
+          "address": {
+            "address1": "326 King St",
+            "address2": null,
+            "city": "Alexandria",
+            "state": "VA",
+            "postcode": "22314",
+            "country": "US"
+          }
+        },
+        "_links": {
+          "self": {
+            "href": "/v2/animals/76738666"
+          },
+          "type": {
+            "href": "/v2/types/dog"
+          },
+          "organization": {
+            "href": "/v2/organizations/va600"
+          }
+        }
+      },
+      "detailed_photo_analysis": {
+        "physical_description": "German Shepherd Dog with classic breed coloring - tan and black coat with the characteristic saddle pattern. Alert, pointed ears and intelligent brown eyes. Strong, athletic build typical of the breed.",
+        "facial_features": "Intelligent dark brown eyes with an alert, attentive expression. Classic German Shepherd facial structure with pointed ears that stand erect. Black nose and the characteristic tan and black facial markings.",
+        "pose_and_setting": "Alert, attentive pose showing the classic German Shepherd stance. The photo captures the breed's noble bearing and intelligent expression.",
+        "personality_indicators": "Alert and intelligent expression typical of German Shepherds. The attentive pose suggests a dog that is eager to please and highly trainable. Shows confidence and engagement.",
+        "distinctive_features": "German Shepherd breed characteristics: tan and black coat, pointed erect ears, intelligent expression, athletic build"
+      },
+      "enhanced_prompts": {
+        "professional": "Create a professional portrait of Rebekah, a German Shepherd Dog with classic tan and black coloring. Show the characteristic saddle pattern of dark markings over a tan base, alert pointed ears, and intelligent dark brown eyes. Strong, athletic build with the noble bearing typical of the breed. Professional pet photography style with lighting that highlights the beautiful coat pattern and intelligent expression.",
+        "storybook": "Create a whimsical storybook illustration of Rebekah, a German Shepherd Dog, as a brave knight's loyal companion. Show Rebekah with tan and black coloring, wearing a decorative collar or light armor, standing proudly beside a castle. The dog should have alert ears, intelligent eyes, and a heroic stance. Children's book illustration style with medieval adventure elements.",
+        "ghibli": "Create a Studio Ghibli-style illustration of Rebekah, a German Shepherd Dog with mystical golden and shadow markings, as a forest guardian spirit. The dog should have the classic tan and black coloring that seems to glow with inner light, intelligent eyes, and a noble, protective stance. Set in an ancient forest with magical creatures seeking the dog's protection. Studio Ghibli animation aesthetic with warm, golden lighting."
+      }
+    },
+    {
+      "name": "Crouton",
+      "original_data": {
+        "id": 76850107,
+        "organization_id": "VA600",
+        "url": "https://www.petfinder.com/dog/crouton-star-adoption-pending-star-76850107/va/alexandria/operation-paws-for-homes-va600/?referrer_id=41bf5875-18ad-4831-b3b5-3cace1f4568f&utm_source=api&utm_medium=partnership&utm_content=41bf5875-18ad-4831-b3b5-3cace1f4568f",
+        "type": "Dog",
+        "species": "Dog",
+        "breeds": {
+          "primary": "Mixed Breed",
+          "secondary": null,
+          "mixed": false,
+          "unknown": false
+        },
+        "colors": {
+          "primary": "Yellow / Tan / Blond / Fawn",
+          "secondary": null,
+          "tertiary": null
+        },
+        "age": "Adult",
+        "gender": "Male",
+        "size": "Medium",
+        "coat": null,
+        "attributes": {
+          "spayed_neutered": true,
+          "house_trained": false,
+          "declawed": null,
+          "special_needs": false,
+          "shots_current": true
+        },
+        "environment": {
+          "children": true,
+          "dogs": true,
+          "cats": true
+        },
+        "tags": [
+          "Good with Dogs",
+          "Good with Cats",
+          "Good with Kids"
+        ],
+        "name": "Crouton *Adoption Pending*",
+        "description": "Located in Bel Air, MD\n\nCrouton currently lives with a 9 year old boy, 4 dogs and 2 cats. He...",
+        "organization_animal_id": "OPFH-A-46360",
+        "photos": [
+          {
+            "small": "https://dl5zpyw5k3jeb.cloudfront.net/photos/pets/76850107/1/?bust=1752060301&width=100",
+            "medium": "https://dl5zpyw5k3jeb.cloudfront.net/photos/pets/76850107/1/?bust=1752060301&width=300",
+            "large": "https://dl5zpyw5k3jeb.cloudfront.net/photos/pets/76850107/1/?bust=1752060301&width=600",
+            "full": "https://dl5zpyw5k3jeb.cloudfront.net/photos/pets/76850107/1/?bust=1752060301"
+          },
+          {
+            "small": "https://dl5zpyw5k3jeb.cloudfront.net/photos/pets/76850107/2/?bust=1751966986&width=100",
+            "medium": "https://dl5zpyw5k3jeb.cloudfront.net/photos/pets/76850107/2/?bust=1751966986&width=300",
+            "large": "https://dl5zpyw5k3jeb.cloudfront.net/photos/pets/76850107/2/?bust=1751966986&width=600",
+            "full": "https://dl5zpyw5k3jeb.cloudfront.net/photos/pets/76850107/2/?bust=1751966986"
+          },
+          {
+            "small": "https://dl5zpyw5k3jeb.cloudfront.net/photos/pets/76850107/3/?bust=1751966988&width=100",
+            "medium": "https://dl5zpyw5k3jeb.cloudfront.net/photos/pets/76850107/3/?bust=1751966988&width=300",
+            "large": "https://dl5zpyw5k3jeb.cloudfront.net/photos/pets/76850107/3/?bust=1751966988&width=600",
+            "full": "https://dl5zpyw5k3jeb.cloudfront.net/photos/pets/76850107/3/?bust=1751966988"
+          },
+          {
+            "small": "https://dl5zpyw5k3jeb.cloudfront.net/photos/pets/76850107/4/?bust=1752060302&width=100",
+            "medium": "https://dl5zpyw5k3jeb.cloudfront.net/photos/pets/76850107/4/?bust=1752060302&width=300",
+            "large": "https://dl5zpyw5k3jeb.cloudfront.net/photos/pets/76850107/4/?bust=1752060302&width=600",
+            "full": "https://dl5zpyw5k3jeb.cloudfront.net/photos/pets/76850107/4/?bust=1752060302"
+          },
+          {
+            "small": "https://dl5zpyw5k3jeb.cloudfront.net/photos/pets/76850107/5/?bust=1752060303&width=100",
+            "medium": "https://dl5zpyw5k3jeb.cloudfront.net/photos/pets/76850107/5/?bust=1752060303&width=300",
+            "large": "https://dl5zpyw5k3jeb.cloudfront.net/photos/pets/76850107/5/?bust=1752060303&width=600",
+            "full": "https://dl5zpyw5k3jeb.cloudfront.net/photos/pets/76850107/5/?bust=1752060303"
+          },
+          {
+            "small": "https://dl5zpyw5k3jeb.cloudfront.net/photos/pets/76850107/6/?bust=1751375344&width=100",
+            "medium": "https://dl5zpyw5k3jeb.cloudfront.net/photos/pets/76850107/6/?bust=1751375344&width=300",
+            "large": "https://dl5zpyw5k3jeb.cloudfront.net/photos/pets/76850107/6/?bust=1751375344&width=600",
+            "full": "https://dl5zpyw5k3jeb.cloudfront.net/photos/pets/76850107/6/?bust=1751375344"
+          }
+        ],
+        "primary_photo_cropped": {
+          "small": "https://dl5zpyw5k3jeb.cloudfront.net/photos/pets/76850107/1/?bust=1752060301&width=300",
+          "medium": "https://dl5zpyw5k3jeb.cloudfront.net/photos/pets/76850107/1/?bust=1752060301&width=450",
+          "large": "https://dl5zpyw5k3jeb.cloudfront.net/photos/pets/76850107/1/?bust=1752060301&width=600",
+          "full": "https://dl5zpyw5k3jeb.cloudfront.net/photos/pets/76850107/1/?bust=1752060301"
+        },
+        "videos": [],
+        "status": "adoptable",
+        "status_changed_at": "2025-06-14T11:49:52+0000",
+        "published_at": "2025-06-14T11:49:38+0000",
+        "distance": 0.1891,
+        "contact": {
+          "email": "adopt@ophrescue.org",
+          "phone": null,
+          "address": {
+            "address1": "326 King St",
+            "address2": null,
+            "city": "Alexandria",
+            "state": "VA",
+            "postcode": "22314",
+            "country": "US"
+          }
+        },
+        "_links": {
+          "self": {
+            "href": "/v2/animals/76850107"
+          },
+          "type": {
+            "href": "/v2/types/dog"
+          },
+          "organization": {
+            "href": "/v2/organizations/va600"
+          }
+        }
+      },
+      "detailed_photo_analysis": {
+        "physical_description": "Mixed breed dog with a light-colored coat, possibly cream or light tan. Medium-sized build with floppy ears and a friendly expression. The coat appears to be medium length and soft-looking.",
+        "facial_features": "Warm, friendly eyes with a gentle expression. Soft, floppy ears that frame the face nicely. The overall expression is sweet and approachable.",
+        "pose_and_setting": "Relaxed, friendly pose that shows the dog's gentle nature. The expression is warm and inviting, suggesting a dog that loves human companionship.",
+        "personality_indicators": "Sweet, gentle expression that suggests a loving and affectionate personality. The relaxed pose indicates a dog that is comfortable and social. Perfect family companion energy.",
+        "distinctive_features": "Light cream/tan coat, floppy ears, gentle expression, medium build, soft appearance"
+      },
+      "enhanced_prompts": {
+        "professional": "Create a professional portrait of Crouton, a mixed breed dog with a beautiful light cream/tan coat and gentle brown eyes. Show the dog's soft, floppy ears and sweet, friendly expression. Medium-sized build with a soft, fluffy coat that looks very huggable. Professional pet photography style with warm lighting that highlights the dog's gentle, loving nature.",
+        "storybook": "Create a whimsical storybook illustration of Crouton, a cream-colored mixed breed dog, as a magical baker's assistant. Show Crouton with a light tan coat, floppy ears, and a gentle expression, wearing a tiny chef's hat and apron. The dog should be in a cozy bakery surrounded by magical floating pastries and warm golden light. Children's book illustration style with cozy, heartwarming elements.",
+        "ghibli": "Create a Studio Ghibli-style illustration of Crouton, a cream-colored mixed breed dog, as a gentle spirit of the hearth and home. The dog should have a soft, light-colored coat that seems to glow with warmth, floppy ears, and the most loving expression. Set in a cozy cottage with magical warmth radiating from the dog, surrounded by floating golden lights and gentle spirits. Studio Ghibli animation aesthetic with warm, comforting lighting."
+      }
+    }
+  ]
+}

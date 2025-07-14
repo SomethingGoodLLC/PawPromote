@@ -1,0 +1,16 @@
+ENHANCED STORYBOOK PROMPT FOR ZEBRA
+============================================================
+
+Physical Analysis:
+Domestic short hair cat with distinctive black and white markings. Primarily white coat with black patches, giving a tuxedo-like appearance. Medium-sized build with alert ears and bright eyes.
+
+Facial Features:
+Bright, expressive eyes and a pink nose. The black and white facial markings create an interesting pattern. Alert, upright ears and white whiskers.
+
+Personality Indicators:
+Alert and engaging expression. The direct gaze and upright posture suggest confidence and curiosity. Appears social and interested in interaction.
+
+ENHANCED PROMPT:
+Create a whimsical storybook illustration of Zebra, a black and white tuxedo cat, as a dapper gentleman adventurer. Show Zebra wearing a tiny bow tie and top hat, with the natural tuxedo markings enhanced by the formal wear. The cat should be on a grand adventure, perhaps exploring a mysterious mansion. Children's book illustration style with elegant and playful elements.
+
+This prompt is designed to generate AI images that actually look like Zebra based on the real shelter photo.

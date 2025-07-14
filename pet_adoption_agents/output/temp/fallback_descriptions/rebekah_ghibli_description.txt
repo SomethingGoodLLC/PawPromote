@@ -1,0 +1,11 @@
+
+STUDIO GHIBLI STYLE ILLUSTRATION OF REBEKAH
+
+Magical Elements: Based on personality - Analysis failed
+
+Physical Description: Unable to analyze photo - Error code: 429 - {'error': {'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.', 'type': 'insufficient_quota', 'param': None, 'code': 'insufficient_quota'}}
+
+Recommended Image Generation Prompt:
+Studio Ghibli style illustration of Rebekah, a Dog
+
+Style Notes: Studio Ghibli animation aesthetic, soft watercolor textures, dreamy lighting, magical atmosphere.

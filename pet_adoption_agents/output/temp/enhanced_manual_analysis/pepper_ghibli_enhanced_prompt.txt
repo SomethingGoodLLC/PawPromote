@@ -1,0 +1,16 @@
+ENHANCED GHIBLI PROMPT FOR PEPPER
+============================================================
+
+Physical Analysis:
+Small black domestic short hair cat with bright golden-yellow eyes. Sleek, solid black coat with no visible markings. Compact build typical of domestic short hair breed. Alert expression with slightly pointed ears.
+
+Facial Features:
+Striking bright golden/amber eyes that are large and expressive. Small pink nose. Alert, upright ears. Whiskers are white/light colored against the black fur. Sweet, slightly cautious expression.
+
+Personality Indicators:
+Alert and observant but not fearful. Comfortable in shelter environment. The way Pepper is positioned suggests curiosity mixed with a bit of shyness - typical of a former feral kitten who has learned to trust.
+
+ENHANCED PROMPT:
+Create a Studio Ghibli-style illustration of Pepper, a small black cat with mystical golden eyes, in an enchanted forest setting. The cat should have a solid black coat that seems to shimmer with magic, bright golden eyes that glow softly, and an wise, ancient expression. Surround with floating spirits, magical fireflies, and soft moonlight filtering through trees. Studio Ghibli animation aesthetic with soft watercolor textures and dreamy lighting.
+
+This prompt is designed to generate AI images that actually look like Pepper based on the real shelter photo.
