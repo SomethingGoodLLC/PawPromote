@@ -12,6 +12,8 @@ dependencies = [
   "python-pptx",
   "pillow",
   "google-cloud-aiplatform",
+  "pytest>=8.4.1",
+  "pytest-asyncio>=1.0.0",
 ]
 requires-python = ">=3.10"
 

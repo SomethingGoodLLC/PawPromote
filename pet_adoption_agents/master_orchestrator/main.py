@@ -42,12 +42,13 @@ async def master_orchestrator(
 ):
     agent_context.logger.info("Starting master_orchestrator with task: " + task)
 
-    # Simple parsing logic (expand with regex/NLP for production)
+    # Parse task
     match = re.match(r"Promote (\d+) adoptable pets from ([\w\s]+) shelter (\w+) with .* stories: .* ship to donor at ([\w\s\[\]]+)", task)
     if not match:
         return {"error": "Invalid task format"}
     num_pets, shelter_name, shelter_id, address = match.groups()
     num_pets = int(num_pets)
+    humorous = "humorous" in task.lower()  # Detect humor option
 
     # Fetch active agents
     agents = await get_active_agents()
@@ -58,13 +59,13 @@ async def master_orchestrator(
     assembler_id = get_agent_id(agents, "asset_assembler")
     shipper_id = get_agent_id(agents, "book_shipper")
 
-    # Step 1: Fetch pet data
+    # Step 1: Fetch pet data (including photos for video generation)
     fetcher_input = {"shelter_name": shelter_name, "shelter_id": shelter_id, "num_pets": num_pets, "include_photos": True}
     pets_response = await session.send(client_id=fetcher_id, message=fetcher_input)
     pets = pets_response.response
 
-    # Step 2: Generate content
-    generator_input = {"pets": pets}
+    # Step 2: Generate content (delegate with humor option and real photos)
+    generator_input = {"pets": pets, "humorous": humorous}
     content_response = await session.send(client_id=generator_id, message=generator_input)
     content = content_response.response
 

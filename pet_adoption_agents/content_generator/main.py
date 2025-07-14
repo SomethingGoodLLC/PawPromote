@@ -1,10 +1,11 @@
 import asyncio
 import os
-from typing import Annotated, Any, Dict, List
+from typing import Annotated, Any, Dict, List, Optional
 
+import requests
 from openai import OpenAI
 import vertexai
-from vertexai.preview.generative_models import GenerativeModel
+from vertexai.preview.generative_models import GenerativeModel, Part
 from genai_session.session import GenAISession
 from genai_session.utils.context import GenAIContext
 
@@ -12,8 +13,75 @@ AGENT_JWT = "PLACEHOLDER_JWT"  # Replace with actual JWT after registration
 session = GenAISession(jwt_token=AGENT_JWT)
 
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY", "placeholder")
+AZURE_OPENAI_ENDPOINT = os.getenv("AZURE_OPENAI_ENDPOINT", None)  # Set if using Azure
 GOOGLE_PROJECT_ID = os.getenv("GOOGLE_PROJECT_ID", "placeholder")
 GOOGLE_LOCATION = os.getenv("GOOGLE_LOCATION", "us-central1")
+
+
+def get_openai_client() -> OpenAI:
+    if AZURE_OPENAI_ENDPOINT:
+        return OpenAI(
+            api_key=OPENAI_API_KEY,
+            base_url=AZURE_OPENAI_ENDPOINT,  # Configure for Azure if using Sora via Azure
+            api_version="2023-05-01"  # Example Azure API version; adjust for Sora
+        )
+    return OpenAI(api_key=OPENAI_API_KEY)
+
+
+async def generate_story(pet: Dict[str, Any], humorous: bool = False) -> str:
+    client = get_openai_client()
+    base_prompt = f"Create a heartwarming adventure story for {pet['name']} using real description: {pet['description']}. Include adoption CTA."
+    if humorous:
+        base_prompt = f"Create a funny, heartwarming adventure story for {pet['name']} using real description: {pet['description']}. Include puns, silly situations, and adoption CTA."
+    response = client.chat.completions.create(
+        model="gpt-4o",
+        messages=[{"role": "user", "content": base_prompt}]
+    )
+    return response.choices[0].message.content
+
+
+async def generate_image(pet: Dict[str, Any], prompt_suffix: str = "promotional image") -> str:
+    client = get_openai_client()
+    prompt = f"Generate a {prompt_suffix} for pet {pet['name']} based on: {pet['description']}"
+    response = client.images.generate(model="gpt-image-1", prompt=prompt, n=1, size="1024x1024")
+    return response.data[0].url
+
+
+async def generate_badge(pet: Dict[str, Any]) -> str:
+    return await generate_image(pet, "status badge in a humorous style")
+
+
+async def generate_video_from_photo(pet: Dict[str, Any], photo_url: Optional[str], humorous: bool = False) -> str:
+    if not photo_url:
+        return "no_video_generated"  # Fallback if no photo
+
+    # Download photo
+    response = requests.get(photo_url)
+    if response.status_code != 200:
+        return "failed_to_download_photo"
+    image_data = response.content
+
+    client = get_openai_client()
+    theme = "adventure" if not humorous else "scene, e.g., chasing butterflies comically"
+    prompt = f"Animate this real {pet.get('type', 'pet')} in a humorous {theme} based on: {pet['description']}."
+
+    try:
+        # Assume Sora image-to-video endpoint (not public yet; placeholder)
+        video_response = client.videos.generate(  # Hypothetical call
+            model="sora",
+            prompt=prompt,
+            input_image=image_data,  # Assume binary image data upload
+            duration="short"  # Short video clip
+        )
+        return video_response.data[0].url
+    except Exception as e:
+        # Fallback to Veo3 via Vertex AI
+        vertexai.init(project=GOOGLE_PROJECT_ID, location=GOOGLE_LOCATION)
+        model = GenerativeModel("gemini-1.5-pro")  # Use Gemini with Veo integration; adjust for actual Veo3
+        image_part = Part.from_data(mime_type="image/jpeg", data=image_data)
+        video_response = model.generate_content([image_part, prompt])
+        # Assume response provides a GCS URI or downloadable URL
+        return video_response.candidates[0].content.parts[0].file_data.file_uri
 
 
 @session.bind(
@@ -22,40 +90,26 @@ GOOGLE_LOCATION = os.getenv("GOOGLE_LOCATION", "us-central1")
 )
 async def content_generator(
     agent_context: GenAIContext,
-    pets: Annotated[List[Dict[str, Any]], "List of pet data with names, descriptions, and photo URLs"]
+    pets: Annotated[List[Dict[str, Any]], "List of pet data with names, descriptions, and photo URLs"],
+    humorous: Annotated[bool, "Whether to generate humorous content"] = False
 ) -> Dict[str, Any]:
-    agent_context.logger.info(f"Generating content for {len(pets)} pets")
+    agent_context.logger.info(f"Generating content for {len(pets)} pets with humorous={humorous}")
 
-    client = OpenAI(api_key=OPENAI_API_KEY)
-    content = {"stories": [], "videos": []}
+    content = {"stories": [], "images": [], "badges": [], "videos": []}
 
     for pet in pets:
-        # Generate humorous story using GPT
-        story_prompt = f"Create a humorous adventure story for a pet named {pet['name']} based on: {pet['description']}"
-        story_response = client.chat.completions.create(
-            model="gpt-4o",
-            messages=[{"role": "user", "content": story_prompt}]
-        )
-        story = story_response.choices[0].message.content
+        story = await generate_story(pet, humorous)
         content["stories"].append({"pet": pet["name"], "story": story})
 
-        # Generate badge/image using DALL-E
-        image_prompt = f"Humorous badge for pet {pet['name']} in adventure style"
-        image_response = client.images.generate(model="dall-e-3", prompt=image_prompt, n=1)
-        badge_url = image_response.data[0].url
+        image_url = await generate_image(pet)
+        content["images"].append({"pet": pet["name"], "image_url": image_url})
 
-        # Generate video: Placeholder for Sora (not public); fallback to Veo3
-        video_url = "placeholder_sora_video.mp4"  # Sora integration: client.videos.generate(...) when available
-        try:
-            vertexai.init(project=GOOGLE_PROJECT_ID, location=GOOGLE_LOCATION)
-            model = GenerativeModel("video-veo3")  # Assuming Veo3 model name
-            video_prompt = f"Generate a dynamic video of {pet['name']} in a humorous adventure, conditioned on real photo: {pet['photos'][0] if pet['photos'] else ''}"
-            video_response = model.generate_content(video_prompt)  # Simplified; adjust for actual API
-            video_url = video_response.candidates[0].content.parts[0].file_data.file_uri
-        except Exception as e:
-            agent_context.logger.error(f"Veo3 fallback failed: {e}")
+        badge_url = await generate_badge(pet)
+        content["badges"].append({"pet": pet["name"], "badge_url": badge_url})
 
-        content["videos"].append({"pet": pet["name"], "video_url": video_url, "badge_url": badge_url})
+        photo_url = pet.get("photos", [None])[0] if "photos" in pet else None
+        video_url = await generate_video_from_photo(pet, photo_url, humorous)
+        content["videos"].append({"pet": pet["name"], "video_url": video_url})
 
     return content
 

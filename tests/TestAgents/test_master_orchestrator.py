@@ -2,6 +2,7 @@ import asyncio
 import json
 import pytest
 from unittest.mock import patch, MagicMock, AsyncMock
+from pet_adoption_agents.master_orchestrator.main import GenAIContext
 
 @pytest.mark.asyncio
 async def test_master_orchestrator_mock():
@@ -103,6 +104,32 @@ async def test_master_orchestrator_mock():
         
         # Fourth call should be to book_shipper
         assert calls[3][1]['client_id'] == 'shipper_id'
+
+@pytest.mark.asyncio
+async def test_master_orchestrator_with_humor():
+    from pet_adoption_agents.master_orchestrator.main import master_orchestrator
+    mock_context = MagicMock(spec=GenAIContext)
+    task = "Promote 2 adoptable pets from ASPCA shelter NY114 with humorous adventure stories: Create a book, generate videos from real photos, and ship to donor at 123 Main St"
+    with patch('pet_adoption_agents.master_orchestrator.main.get_active_agents') as mock_active, \
+         patch('pet_adoption_agents.master_orchestrator.main.session.send') as mock_send:
+        mock_active.return_value = [
+            {'name': 'data_fetcher', 'id': 'fetcher_id'},
+            {'name': 'content_generator', 'id': 'generator_id'},
+            {'name': 'asset_assembler', 'id': 'assembler_id'},
+            {'name': 'book_shipper', 'id': 'shipper_id'}
+        ]
+        mock_send.side_effect = [
+            AsyncMock(response=[{'name': 'Pet1'}]),  # fetcher
+            AsyncMock(response={'stories': []}),    # generator
+            AsyncMock(response={'book_file': 'book.pdf'}),  # assembler
+            AsyncMock(response={'status': 'shipped'})       # shipper
+        ]
+        result = await master_orchestrator(mock_context, task)
+        assert 'status' in result and result['status'] == 'completed'
+        # Verify generator input includes humorous=True
+        generator_call = mock_send.call_args_list[1][1]
+        assert generator_call['client_id'] == 'generator_id'
+        assert generator_call['message']['humorous'] is True
 
 @pytest.mark.asyncio
 async def test_pet_updates_mock():
