@@ -12,6 +12,7 @@ dependencies = [
   "python-pptx",
   "pillow",
   "google-cloud-aiplatform",
+  "qrcode[pil]",
 ]
 requires-python = ">=3.10"
 

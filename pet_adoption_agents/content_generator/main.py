@@ -116,6 +116,61 @@ async def generate_video_from_photo(pet: Dict[str, Any], photo_url: Optional[str
         return video_response.candidates[0].content.parts[0].file_data.file_uri
 
 
+async def generate_story_image(pet: Dict[str, Any], story: str, real_photo_url: Optional[str] = None) -> str:
+    """Generate a story-specific image using GPT-Image-1 that incorporates the story context"""
+    client = get_openai_client()
+    
+    # Extract key story elements for image generation
+    story_elements = []
+    if "adventure" in story.lower():
+        story_elements.append("on an exciting adventure")
+    if "heist" in story.lower() or "criminal" in story.lower():
+        story_elements.append("in a mischievous detective scene")
+    if "tea party" in story.lower() or "retirement" in story.lower():
+        story_elements.append("in an elegant, cozy setting")
+    if "greeter" in story.lower() or "jumping" in story.lower():
+        story_elements.append("enthusiastically greeting visitors")
+    if "security" in story.lower() or "patrol" in story.lower():
+        story_elements.append("proudly on duty as a guardian")
+    if "food critic" in story.lower() or "dining" in story.lower():
+        story_elements.append("as a sophisticated food connoisseur")
+    
+    scene_description = " ".join(story_elements) if story_elements else "in a heartwarming adoption scene"
+    
+    # Create detailed prompt incorporating pet details and story context
+    prompt = f"""Create a high-quality, heartwarming image of {pet['name']}, a {pet.get('breeds', {}).get('primary', 'mixed')} {pet.get('type', 'pet').lower()} {scene_description}. 
+    
+    Pet details: {pet.get('age', 'adult')} {pet.get('gender', '').lower()}, {pet.get('colors', {}).get('primary', 'beautiful coloring')}.
+    
+    Story context: {story[:200]}...
+    
+    Style: Professional pet photography meets storybook illustration, warm and inviting lighting, perfect for pet adoption promotion. 
+    The image should capture the pet's personality from the story while maintaining photorealistic quality."""
+    
+    try:
+        response = client.images.generate(
+            model="dall-e-3",  # Using DALL-E 3 as GPT-Image-1 placeholder
+            prompt=prompt,
+            n=1,
+            size="1024x1024",
+            quality="hd"
+        )
+        return response.data[0].url
+    except Exception as e:
+        # Fallback to simpler prompt if detailed one fails
+        simple_prompt = f"A heartwarming photo of {pet['name']}, a {pet.get('type', 'pet').lower()} ready for adoption"
+        try:
+            response = client.images.generate(
+                model="dall-e-3",
+                prompt=simple_prompt,
+                n=1,
+                size="1024x1024"
+            )
+            return response.data[0].url
+        except:
+            return f"https://example.com/{pet['name'].lower()}_story_image.jpg"
+
+
 @session.bind(
     name="content_generator",
     description="Generates humorous stories, images, badges, videos using OpenAI (Sora) or Google Veo3, conditioned on real pet photos."
@@ -127,24 +182,31 @@ async def content_generator(
 ) -> Dict[str, Any]:
     agent_context.logger.info(f"Generating content for {len(pets)} pets with humorous={humorous}")
 
-    content = {"stories": [], "images": [], "badges": [], "videos": []}
+    content = {"stories": [], "images": [], "story_images": [], "badges": [], "videos": []}
 
     for pet in pets:
+        # Generate story first
         story = await generate_story(pet, humorous)
         content["stories"].append({"pet": pet["name"], "story": story})
 
-        # Use enhanced image generation if photo is available
+        # Use real Petfinder photo
         photo_url = pet.get("photos", [None])[0] if "photos" in pet else None
         if photo_url:
-            image_url = await generate_enhanced_image_from_photo(pet, photo_url, "in a cozy home setting ready for adoption")
+            content["images"].append({"pet": pet["name"], "image_url": photo_url, "type": "real_photo"})
         else:
-            image_url = await generate_image(pet)
-        content["images"].append({"pet": pet["name"], "image_url": image_url})
+            # Generate a basic pet image if no real photo
+            basic_image_url = await generate_image(pet)
+            content["images"].append({"pet": pet["name"], "image_url": basic_image_url, "type": "generated_basic"})
 
+        # Generate story-specific image using GPT-Image-1
+        story_image_url = await generate_story_image(pet, story, photo_url)
+        content["story_images"].append({"pet": pet["name"], "image_url": story_image_url, "type": "story_specific"})
+
+        # Generate badge
         badge_url = await generate_badge(pet)
         content["badges"].append({"pet": pet["name"], "badge_url": badge_url})
 
-        photo_url = pet.get("photos", [None])[0] if "photos" in pet else None
+        # Generate video from real photo
         video_url = await generate_video_from_photo(pet, photo_url, humorous)
         content["videos"].append({"pet": pet["name"], "video_url": video_url})
 

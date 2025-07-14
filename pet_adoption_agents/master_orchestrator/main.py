@@ -70,7 +70,7 @@ async def master_orchestrator(
     content = content_response.response
 
     # Step 3: Assemble assets
-    assembler_input = {"content": content}
+    assembler_input = {"content": content, "specification": "create pdf book and ppt for the generated stories"}
     assets_response = await session.send(client_id=assembler_id, message=assembler_input)
     book_file = assets_response.response.get("book_file")
 
