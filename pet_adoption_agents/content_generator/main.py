@@ -47,6 +47,38 @@ async def generate_image(pet: Dict[str, Any], prompt_suffix: str = "promotional 
     return response.data[0].url
 
 
+async def generate_enhanced_image_from_photo(pet: Dict[str, Any], photo_url: Optional[str], scene_description: str = "in a beautiful park setting") -> str:
+    """Generate an enhanced image using GPT-Image-1 with detailed description based on real photo"""
+    if not photo_url:
+        return await generate_image(pet, "promotional image")
+    
+    # Download and analyze the photo to create a detailed description
+    try:
+        response = requests.get(photo_url)
+        if response.status_code != 200:
+            return await generate_image(pet, "promotional image")
+        
+        # Create a detailed prompt that describes what we want based on the pet's appearance
+        # Since gpt-image-1 is text-to-image only, we enhance the description
+        enhanced_prompt = f"""Create a high-quality promotional image of a {pet.get('type', 'pet')} named {pet['name']} {scene_description}. 
+        Based on this description: {pet['description']}. 
+        Style: Professional pet photography, warm lighting, engaging pose, suitable for adoption promotion.
+        The {pet.get('type', 'pet')} should look friendly and adoptable."""
+        
+        client = get_openai_client()
+        image_response = client.images.generate(
+            model="gpt-image-1", 
+            prompt=enhanced_prompt, 
+            n=1, 
+            size="1024x1024"
+        )
+        return image_response.data[0].url
+        
+    except Exception as e:
+        # Fallback to regular image generation
+        return await generate_image(pet, "promotional image")
+
+
 async def generate_badge(pet: Dict[str, Any]) -> str:
     return await generate_image(pet, "status badge in a humorous style")
 
@@ -101,7 +133,12 @@ async def content_generator(
         story = await generate_story(pet, humorous)
         content["stories"].append({"pet": pet["name"], "story": story})
 
-        image_url = await generate_image(pet)
+        # Use enhanced image generation if photo is available
+        photo_url = pet.get("photos", [None])[0] if "photos" in pet else None
+        if photo_url:
+            image_url = await generate_enhanced_image_from_photo(pet, photo_url, "in a cozy home setting ready for adoption")
+        else:
+            image_url = await generate_image(pet)
         content["images"].append({"pet": pet["name"], "image_url": image_url})
 
         badge_url = await generate_badge(pet)

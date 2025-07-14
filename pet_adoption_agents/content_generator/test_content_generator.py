@@ -1,7 +1,7 @@
 import asyncio
 import pytest
 from unittest.mock import patch, AsyncMock, MagicMock
-from main import generate_story, generate_image, generate_badge, generate_video_from_photo, content_generator, get_openai_client
+from main import generate_story, generate_image, generate_badge, generate_video_from_photo, content_generator, get_openai_client, generate_enhanced_image_from_photo
 
 
 class MockContext:
@@ -165,12 +165,12 @@ async def test_content_generator():
     pets = [{'name': 'Buddy', 'description': 'Friendly dog', 'photos': ['http://example.com/photo.jpg'], 'type': 'dog'}]
     
     with patch('main.generate_story') as mock_story, \
-         patch('main.generate_image') as mock_image, \
+         patch('main.generate_enhanced_image_from_photo') as mock_enhanced_image, \
          patch('main.generate_badge') as mock_badge, \
          patch('main.generate_video_from_photo') as mock_video:
         
         mock_story.return_value = 'Generated story text'
-        mock_image.return_value = 'http://example.com/image.png'
+        mock_enhanced_image.return_value = 'http://example.com/enhanced_image.png'
         mock_badge.return_value = 'http://example.com/badge.png'
         mock_video.return_value = 'http://example.com/video.mp4'
         
@@ -186,7 +186,7 @@ async def test_content_generator():
         assert result['stories'][0]['pet'] == 'Buddy'
         assert result['stories'][0]['story'] == 'Generated story text'
         assert result['images'][0]['pet'] == 'Buddy'
-        assert result['images'][0]['image_url'] == 'http://example.com/image.png'
+        assert result['images'][0]['image_url'] == 'http://example.com/enhanced_image.png'
         assert result['badges'][0]['pet'] == 'Buddy'
         assert result['badges'][0]['badge_url'] == 'http://example.com/badge.png'
         assert result['videos'][0]['pet'] == 'Buddy'
@@ -194,7 +194,7 @@ async def test_content_generator():
         
         # Verify function calls
         mock_story.assert_called_once_with(pets[0], True)
-        mock_image.assert_called_once_with(pets[0])
+        mock_enhanced_image.assert_called_once_with(pets[0], 'http://example.com/photo.jpg', 'in a cozy home setting ready for adoption')
         mock_badge.assert_called_once_with(pets[0])
         mock_video.assert_called_once_with(pets[0], 'http://example.com/photo.jpg', True)
 
@@ -221,6 +221,46 @@ def test_get_openai_client_azure():
             base_url='https://test.openai.azure.com/',
             api_version='2023-05-01'
         )
+
+
+@pytest.mark.asyncio
+async def test_generate_enhanced_image_from_photo_success():
+    """Test generate_enhanced_image_from_photo with valid photo"""
+    pet = {'name': 'Buddy', 'description': 'Friendly dog', 'type': 'dog'}
+    photo_url = 'http://example.com/photo.jpg'
+    
+    with patch('requests.get') as mock_get, \
+         patch('main.get_openai_client') as mock_client:
+        
+        mock_get.return_value.status_code = 200
+        mock_get.return_value.content = b'image_data'
+        
+        mock_response = MagicMock()
+        mock_response.data[0].url = 'http://example.com/enhanced_image.png'
+        mock_client.return_value.images.generate.return_value = mock_response
+        
+        result = await generate_enhanced_image_from_photo(pet, photo_url, "in a beautiful park")
+        
+        assert result == 'http://example.com/enhanced_image.png'
+        mock_client.return_value.images.generate.assert_called_once()
+        call_args = mock_client.return_value.images.generate.call_args
+        assert call_args[1]['model'] == 'gpt-image-1'
+        assert 'beautiful park' in call_args[1]['prompt']
+        assert 'Buddy' in call_args[1]['prompt']
+
+
+@pytest.mark.asyncio
+async def test_generate_enhanced_image_from_photo_fallback():
+    """Test generate_enhanced_image_from_photo fallback to regular image"""
+    pet = {'name': 'Buddy', 'description': 'Friendly dog', 'type': 'dog'}
+    
+    with patch('main.generate_image') as mock_generate_image:
+        mock_generate_image.return_value = 'http://example.com/fallback_image.png'
+        
+        # Test with no photo URL
+        result = await generate_enhanced_image_from_photo(pet, None, "in a park")
+        assert result == 'http://example.com/fallback_image.png'
+        mock_generate_image.assert_called_once_with(pet, "promotional image")
 
 
 if __name__ == '__main__':
