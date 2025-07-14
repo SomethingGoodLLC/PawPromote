@@ -1,0 +1,505 @@
+[
+  {
+    "id": 76247650,
+    "organization_id": "VA935",
+    "url": "https://www.petfinder.com/cat/pepper-76247650/va/alexandria/marlees-misfits-va935/?referrer_id=41bf5875-18ad-4831-b3b5-3cace1f4568f&utm_source=api&utm_medium=partnership&utm_content=41bf5875-18ad-4831-b3b5-3cace1f4568f",
+    "type": "Cat",
+    "species": "Cat",
+    "breeds": {
+      "primary": "Domestic Short Hair",
+      "secondary": null,
+      "mixed": false,
+      "unknown": false
+    },
+    "colors": {
+      "primary": "Black",
+      "secondary": null,
+      "tertiary": null
+    },
+    "age": "Adult",
+    "gender": "Female",
+    "size": "Medium",
+    "coat": "Short",
+    "attributes": {
+      "spayed_neutered": true,
+      "house_trained": false,
+      "declawed": false,
+      "special_needs": false,
+      "shots_current": true
+    },
+    "environment": {
+      "children": false,
+      "dogs": false,
+      "cats": true
+    },
+    "tags": [
+      "Independent",
+      "Quiet",
+      "Shy"
+    ],
+    "name": "Pepper",
+    "description": "My name is Pepper and I was a feral kitetn when I found my way to the shelter. I prefer...",
+    "organization_animal_id": null,
+    "photos": [
+      {
+        "small": "https://dbw3zep4prcju.cloudfront.net/animal/feb69ed1-9d0c-43a0-8a14-a2b007c512a5/image/7dd11c27-b1ec-4340-a9cb-26ac70ba50a4.jpg?versionId=u4GXUakzX12kfngo9TMHgKL4FoQqdZmV&bust=1746224948&width=100",
+        "medium": "https://dbw3zep4prcju.cloudfront.net/animal/feb69ed1-9d0c-43a0-8a14-a2b007c512a5/image/7dd11c27-b1ec-4340-a9cb-26ac70ba50a4.jpg?versionId=u4GXUakzX12kfngo9TMHgKL4FoQqdZmV&bust=1746224948&width=300",
+        "large": "https://dbw3zep4prcju.cloudfront.net/animal/feb69ed1-9d0c-43a0-8a14-a2b007c512a5/image/7dd11c27-b1ec-4340-a9cb-26ac70ba50a4.jpg?versionId=u4GXUakzX12kfngo9TMHgKL4FoQqdZmV&bust=1746224948&width=600",
+        "full": "https://dbw3zep4prcju.cloudfront.net/animal/feb69ed1-9d0c-43a0-8a14-a2b007c512a5/image/7dd11c27-b1ec-4340-a9cb-26ac70ba50a4.jpg?versionId=u4GXUakzX12kfngo9TMHgKL4FoQqdZmV&bust=1746224948"
+      },
+      {
+        "small": "https://dbw3zep4prcju.cloudfront.net/animal/feb69ed1-9d0c-43a0-8a14-a2b007c512a5/image/29f788a4-123a-4d17-a372-18a556c4fae8.jpg?versionId=KqEuTAADNTT6d9B69kcvlSILT8nKZ52Q&bust=1746224948&width=100",
+        "medium": "https://dbw3zep4prcju.cloudfront.net/animal/feb69ed1-9d0c-43a0-8a14-a2b007c512a5/image/29f788a4-123a-4d17-a372-18a556c4fae8.jpg?versionId=KqEuTAADNTT6d9B69kcvlSILT8nKZ52Q&bust=1746224948&width=300",
+        "large": "https://dbw3zep4prcju.cloudfront.net/animal/feb69ed1-9d0c-43a0-8a14-a2b007c512a5/image/29f788a4-123a-4d17-a372-18a556c4fae8.jpg?versionId=KqEuTAADNTT6d9B69kcvlSILT8nKZ52Q&bust=1746224948&width=600",
+        "full": "https://dbw3zep4prcju.cloudfront.net/animal/feb69ed1-9d0c-43a0-8a14-a2b007c512a5/image/29f788a4-123a-4d17-a372-18a556c4fae8.jpg?versionId=KqEuTAADNTT6d9B69kcvlSILT8nKZ52Q&bust=1746224948"
+      }
+    ],
+    "primary_photo_cropped": {
+      "small": "https://dbw3zep4prcju.cloudfront.net/animal/feb69ed1-9d0c-43a0-8a14-a2b007c512a5/image/7dd11c27-b1ec-4340-a9cb-26ac70ba50a4.jpg?versionId=u4GXUakzX12kfngo9TMHgKL4FoQqdZmV&bust=1746224948&width=300",
+      "medium": "https://dbw3zep4prcju.cloudfront.net/animal/feb69ed1-9d0c-43a0-8a14-a2b007c512a5/image/7dd11c27-b1ec-4340-a9cb-26ac70ba50a4.jpg?versionId=u4GXUakzX12kfngo9TMHgKL4FoQqdZmV&bust=1746224948&width=450",
+      "large": "https://dbw3zep4prcju.cloudfront.net/animal/feb69ed1-9d0c-43a0-8a14-a2b007c512a5/image/7dd11c27-b1ec-4340-a9cb-26ac70ba50a4.jpg?versionId=u4GXUakzX12kfngo9TMHgKL4FoQqdZmV&bust=1746224948&width=600",
+      "full": "https://dbw3zep4prcju.cloudfront.net/animal/feb69ed1-9d0c-43a0-8a14-a2b007c512a5/image/7dd11c27-b1ec-4340-a9cb-26ac70ba50a4.jpg?versionId=u4GXUakzX12kfngo9TMHgKL4FoQqdZmV&bust=1746224948"
+    },
+    "videos": [],
+    "status": "adoptable",
+    "status_changed_at": "2025-05-02T22:40:27+0000",
+    "published_at": "2025-05-02T22:40:26+0000",
+    "distance": 0.138,
+    "contact": {
+      "email": "marleesmisfits@gmail.com",
+      "phone": null,
+      "address": {
+        "address1": "109 S Alfred St",
+        "address2": null,
+        "city": "Alexandria",
+        "state": "VA",
+        "postcode": "22314",
+        "country": "US"
+      }
+    },
+    "_links": {
+      "self": {
+        "href": "/v2/animals/76247650"
+      },
+      "type": {
+        "href": "/v2/types/cat"
+      },
+      "organization": {
+        "href": "/v2/organizations/va935"
+      }
+    }
+  },
+  {
+    "id": 75992220,
+    "organization_id": "VA935",
+    "url": "https://www.petfinder.com/cat/winnie-75992220/va/alexandria/marlees-misfits-va935/?referrer_id=41bf5875-18ad-4831-b3b5-3cace1f4568f&utm_source=api&utm_medium=partnership&utm_content=41bf5875-18ad-4831-b3b5-3cace1f4568f",
+    "type": "Cat",
+    "species": "Cat",
+    "breeds": {
+      "primary": "Russian Blue",
+      "secondary": null,
+      "mixed": false,
+      "unknown": false
+    },
+    "colors": {
+      "primary": "Gray / Blue / Silver",
+      "secondary": null,
+      "tertiary": null
+    },
+    "age": "Senior",
+    "gender": "Female",
+    "size": "Medium",
+    "coat": "Short",
+    "attributes": {
+      "spayed_neutered": true,
+      "house_trained": true,
+      "declawed": false,
+      "special_needs": false,
+      "shots_current": true
+    },
+    "environment": {
+      "children": null,
+      "dogs": false,
+      "cats": true
+    },
+    "tags": [
+      "Dignified",
+      "Gentle",
+      "Loyal",
+      "Quiet",
+      "Sweet"
+    ],
+    "name": "Winnie",
+    "description": "My name is Winnie and I am looking for a retirement home. I love pets and I am very sweet....",
+    "organization_animal_id": null,
+    "photos": [
+      {
+        "small": "https://dbw3zep4prcju.cloudfront.net/animal/872f83e4-b738-4d30-90af-e38226ef79c5/image/1a1feff7-ee0f-40c3-aafe-250c94d93636.jpg?versionId=iy0GyAlKKfoVL3i4JPGGPjX0hikd5gUl&bust=1744395473&width=100",
+        "medium": "https://dbw3zep4prcju.cloudfront.net/animal/872f83e4-b738-4d30-90af-e38226ef79c5/image/1a1feff7-ee0f-40c3-aafe-250c94d93636.jpg?versionId=iy0GyAlKKfoVL3i4JPGGPjX0hikd5gUl&bust=1744395473&width=300",
+        "large": "https://dbw3zep4prcju.cloudfront.net/animal/872f83e4-b738-4d30-90af-e38226ef79c5/image/1a1feff7-ee0f-40c3-aafe-250c94d93636.jpg?versionId=iy0GyAlKKfoVL3i4JPGGPjX0hikd5gUl&bust=1744395473&width=600",
+        "full": "https://dbw3zep4prcju.cloudfront.net/animal/872f83e4-b738-4d30-90af-e38226ef79c5/image/1a1feff7-ee0f-40c3-aafe-250c94d93636.jpg?versionId=iy0GyAlKKfoVL3i4JPGGPjX0hikd5gUl&bust=1744395473"
+      },
+      {
+        "small": "https://dbw3zep4prcju.cloudfront.net/animal/872f83e4-b738-4d30-90af-e38226ef79c5/image/760f62d9-5084-4359-9847-29129f7d99ab.jpg?versionId=HK3ReZhF58k6dMoaqukqI84SaAHs2pj2&bust=1745863023&width=100",
+        "medium": "https://dbw3zep4prcju.cloudfront.net/animal/872f83e4-b738-4d30-90af-e38226ef79c5/image/760f62d9-5084-4359-9847-29129f7d99ab.jpg?versionId=HK3ReZhF58k6dMoaqukqI84SaAHs2pj2&bust=1745863023&width=300",
+        "large": "https://dbw3zep4prcju.cloudfront.net/animal/872f83e4-b738-4d30-90af-e38226ef79c5/image/760f62d9-5084-4359-9847-29129f7d99ab.jpg?versionId=HK3ReZhF58k6dMoaqukqI84SaAHs2pj2&bust=1745863023&width=600",
+        "full": "https://dbw3zep4prcju.cloudfront.net/animal/872f83e4-b738-4d30-90af-e38226ef79c5/image/760f62d9-5084-4359-9847-29129f7d99ab.jpg?versionId=HK3ReZhF58k6dMoaqukqI84SaAHs2pj2&bust=1745863023"
+      },
+      {
+        "small": "https://dbw3zep4prcju.cloudfront.net/animal/872f83e4-b738-4d30-90af-e38226ef79c5/image/5e1e6146-8ff7-4487-9acc-ed475209cc08.jpg?versionId=OOksUBTBqRxMgHh9BcTBgEH1VVRedGbK&bust=1745863023&width=100",
+        "medium": "https://dbw3zep4prcju.cloudfront.net/animal/872f83e4-b738-4d30-90af-e38226ef79c5/image/5e1e6146-8ff7-4487-9acc-ed475209cc08.jpg?versionId=OOksUBTBqRxMgHh9BcTBgEH1VVRedGbK&bust=1745863023&width=300",
+        "large": "https://dbw3zep4prcju.cloudfront.net/animal/872f83e4-b738-4d30-90af-e38226ef79c5/image/5e1e6146-8ff7-4487-9acc-ed475209cc08.jpg?versionId=OOksUBTBqRxMgHh9BcTBgEH1VVRedGbK&bust=1745863023&width=600",
+        "full": "https://dbw3zep4prcju.cloudfront.net/animal/872f83e4-b738-4d30-90af-e38226ef79c5/image/5e1e6146-8ff7-4487-9acc-ed475209cc08.jpg?versionId=OOksUBTBqRxMgHh9BcTBgEH1VVRedGbK&bust=1745863023"
+      }
+    ],
+    "primary_photo_cropped": {
+      "small": "https://dbw3zep4prcju.cloudfront.net/animal/872f83e4-b738-4d30-90af-e38226ef79c5/image/1a1feff7-ee0f-40c3-aafe-250c94d93636.jpg?versionId=iy0GyAlKKfoVL3i4JPGGPjX0hikd5gUl&bust=1744395473&width=300",
+      "medium": "https://dbw3zep4prcju.cloudfront.net/animal/872f83e4-b738-4d30-90af-e38226ef79c5/image/1a1feff7-ee0f-40c3-aafe-250c94d93636.jpg?versionId=iy0GyAlKKfoVL3i4JPGGPjX0hikd5gUl&bust=1744395473&width=450",
+      "large": "https://dbw3zep4prcju.cloudfront.net/animal/872f83e4-b738-4d30-90af-e38226ef79c5/image/1a1feff7-ee0f-40c3-aafe-250c94d93636.jpg?versionId=iy0GyAlKKfoVL3i4JPGGPjX0hikd5gUl&bust=1744395473&width=600",
+      "full": "https://dbw3zep4prcju.cloudfront.net/animal/872f83e4-b738-4d30-90af-e38226ef79c5/image/1a1feff7-ee0f-40c3-aafe-250c94d93636.jpg?versionId=iy0GyAlKKfoVL3i4JPGGPjX0hikd5gUl&bust=1744395473"
+    },
+    "videos": [],
+    "status": "adoptable",
+    "status_changed_at": "2025-04-11T18:20:08+0000",
+    "published_at": "2025-04-11T18:20:06+0000",
+    "distance": 0.138,
+    "contact": {
+      "email": "marleesmisfits@gmail.com",
+      "phone": null,
+      "address": {
+        "address1": "109 S Alfred St",
+        "address2": null,
+        "city": "Alexandria",
+        "state": "VA",
+        "postcode": "22314",
+        "country": "US"
+      }
+    },
+    "_links": {
+      "self": {
+        "href": "/v2/animals/75992220"
+      },
+      "type": {
+        "href": "/v2/types/cat"
+      },
+      "organization": {
+        "href": "/v2/organizations/va935"
+      }
+    }
+  },
+  {
+    "id": 75816540,
+    "organization_id": "VA935",
+    "url": "https://www.petfinder.com/cat/zebra-75816540/va/alexandria/marlees-misfits-va935/?referrer_id=41bf5875-18ad-4831-b3b5-3cace1f4568f&utm_source=api&utm_medium=partnership&utm_content=41bf5875-18ad-4831-b3b5-3cace1f4568f",
+    "type": "Cat",
+    "species": "Cat",
+    "breeds": {
+      "primary": "Domestic Short Hair",
+      "secondary": null,
+      "mixed": false,
+      "unknown": false
+    },
+    "colors": {
+      "primary": "Black & White / Tuxedo",
+      "secondary": null,
+      "tertiary": null
+    },
+    "age": "Adult",
+    "gender": "Male",
+    "size": "Medium",
+    "coat": "Short",
+    "attributes": {
+      "spayed_neutered": true,
+      "house_trained": true,
+      "declawed": false,
+      "special_needs": false,
+      "shots_current": true
+    },
+    "environment": {
+      "children": true,
+      "dogs": null,
+      "cats": true
+    },
+    "tags": [
+      "Affectionate",
+      "Brave",
+      "Friendly",
+      "Loves",
+      "Playful"
+    ],
+    "name": "Zebra",
+    "description": "ZEBRA was surrendered with other cats in NC. He LOVES attention and will be the first to jump into an...",
+    "organization_animal_id": null,
+    "photos": [
+      {
+        "small": "https://dbw3zep4prcju.cloudfront.net/animal/b2b6c4b5-27f4-46b9-8dca-9f0dc646f1a5/image/3223bbe4-7f91-4810-b51e-61876a92c43c.jpg?versionId=IFffYPSMvJ8MFQWhUlu5cD0qWyFERPdp&bust=1743108405&width=100",
+        "medium": "https://dbw3zep4prcju.cloudfront.net/animal/b2b6c4b5-27f4-46b9-8dca-9f0dc646f1a5/image/3223bbe4-7f91-4810-b51e-61876a92c43c.jpg?versionId=IFffYPSMvJ8MFQWhUlu5cD0qWyFERPdp&bust=1743108405&width=300",
+        "large": "https://dbw3zep4prcju.cloudfront.net/animal/b2b6c4b5-27f4-46b9-8dca-9f0dc646f1a5/image/3223bbe4-7f91-4810-b51e-61876a92c43c.jpg?versionId=IFffYPSMvJ8MFQWhUlu5cD0qWyFERPdp&bust=1743108405&width=600",
+        "full": "https://dbw3zep4prcju.cloudfront.net/animal/b2b6c4b5-27f4-46b9-8dca-9f0dc646f1a5/image/3223bbe4-7f91-4810-b51e-61876a92c43c.jpg?versionId=IFffYPSMvJ8MFQWhUlu5cD0qWyFERPdp&bust=1743108405"
+      }
+    ],
+    "primary_photo_cropped": {
+      "small": "https://dbw3zep4prcju.cloudfront.net/animal/b2b6c4b5-27f4-46b9-8dca-9f0dc646f1a5/image/3223bbe4-7f91-4810-b51e-61876a92c43c.jpg?versionId=IFffYPSMvJ8MFQWhUlu5cD0qWyFERPdp&bust=1743108405&width=300",
+      "medium": "https://dbw3zep4prcju.cloudfront.net/animal/b2b6c4b5-27f4-46b9-8dca-9f0dc646f1a5/image/3223bbe4-7f91-4810-b51e-61876a92c43c.jpg?versionId=IFffYPSMvJ8MFQWhUlu5cD0qWyFERPdp&bust=1743108405&width=450",
+      "large": "https://dbw3zep4prcju.cloudfront.net/animal/b2b6c4b5-27f4-46b9-8dca-9f0dc646f1a5/image/3223bbe4-7f91-4810-b51e-61876a92c43c.jpg?versionId=IFffYPSMvJ8MFQWhUlu5cD0qWyFERPdp&bust=1743108405&width=600",
+      "full": "https://dbw3zep4prcju.cloudfront.net/animal/b2b6c4b5-27f4-46b9-8dca-9f0dc646f1a5/image/3223bbe4-7f91-4810-b51e-61876a92c43c.jpg?versionId=IFffYPSMvJ8MFQWhUlu5cD0qWyFERPdp&bust=1743108405"
+    },
+    "videos": [],
+    "status": "adoptable",
+    "status_changed_at": "2025-03-27T20:48:24+0000",
+    "published_at": "2025-03-27T20:48:23+0000",
+    "distance": 0.138,
+    "contact": {
+      "email": "marleesmisfits@gmail.com",
+      "phone": null,
+      "address": {
+        "address1": "109 S Alfred St",
+        "address2": null,
+        "city": "Alexandria",
+        "state": "VA",
+        "postcode": "22314",
+        "country": "US"
+      }
+    },
+    "_links": {
+      "self": {
+        "href": "/v2/animals/75816540"
+      },
+      "type": {
+        "href": "/v2/types/cat"
+      },
+      "organization": {
+        "href": "/v2/organizations/va935"
+      }
+    }
+  },
+  {
+    "id": 76738666,
+    "organization_id": "VA600",
+    "url": "https://www.petfinder.com/dog/rebekah-76738666/va/alexandria/operation-paws-for-homes-va600/?referrer_id=41bf5875-18ad-4831-b3b5-3cace1f4568f&utm_source=api&utm_medium=partnership&utm_content=41bf5875-18ad-4831-b3b5-3cace1f4568f",
+    "type": "Dog",
+    "species": "Dog",
+    "breeds": {
+      "primary": "German Shepherd Dog",
+      "secondary": "Mixed Breed",
+      "mixed": true,
+      "unknown": false
+    },
+    "colors": {
+      "primary": "Black",
+      "secondary": "White / Cream",
+      "tertiary": null
+    },
+    "age": "Adult",
+    "gender": "Female",
+    "size": "Medium",
+    "coat": null,
+    "attributes": {
+      "spayed_neutered": true,
+      "house_trained": true,
+      "declawed": null,
+      "special_needs": false,
+      "shots_current": true
+    },
+    "environment": {
+      "children": true,
+      "dogs": false,
+      "cats": false
+    },
+    "tags": [
+      "Crate trained in foster home",
+      "Not Good with Cats",
+      "Single Dog Home",
+      "Good with Kids"
+    ],
+    "name": "Rebekah",
+    "description": "Adoption Fee Covered + Free Training! Great news! Rebekah&#039;s adoption fee has been fully covered by a generous supporter, and...",
+    "organization_animal_id": null,
+    "photos": [
+      {
+        "small": "https://dl5zpyw5k3jeb.cloudfront.net/photos/pets/76738666/1/?bust=1750165552&width=100",
+        "medium": "https://dl5zpyw5k3jeb.cloudfront.net/photos/pets/76738666/1/?bust=1750165552&width=300",
+        "large": "https://dl5zpyw5k3jeb.cloudfront.net/photos/pets/76738666/1/?bust=1750165552&width=600",
+        "full": "https://dl5zpyw5k3jeb.cloudfront.net/photos/pets/76738666/1/?bust=1750165552"
+      },
+      {
+        "small": "https://dl5zpyw5k3jeb.cloudfront.net/photos/pets/76738666/2/?bust=1750245381&width=100",
+        "medium": "https://dl5zpyw5k3jeb.cloudfront.net/photos/pets/76738666/2/?bust=1750245381&width=300",
+        "large": "https://dl5zpyw5k3jeb.cloudfront.net/photos/pets/76738666/2/?bust=1750245381&width=600",
+        "full": "https://dl5zpyw5k3jeb.cloudfront.net/photos/pets/76738666/2/?bust=1750245381"
+      },
+      {
+        "small": "https://dl5zpyw5k3jeb.cloudfront.net/photos/pets/76738666/3/?bust=1750245380&width=100",
+        "medium": "https://dl5zpyw5k3jeb.cloudfront.net/photos/pets/76738666/3/?bust=1750245380&width=300",
+        "large": "https://dl5zpyw5k3jeb.cloudfront.net/photos/pets/76738666/3/?bust=1750245380&width=600",
+        "full": "https://dl5zpyw5k3jeb.cloudfront.net/photos/pets/76738666/3/?bust=1750245380"
+      },
+      {
+        "small": "https://dl5zpyw5k3jeb.cloudfront.net/photos/pets/76738666/4/?bust=1750245379&width=100",
+        "medium": "https://dl5zpyw5k3jeb.cloudfront.net/photos/pets/76738666/4/?bust=1750245379&width=300",
+        "large": "https://dl5zpyw5k3jeb.cloudfront.net/photos/pets/76738666/4/?bust=1750245379&width=600",
+        "full": "https://dl5zpyw5k3jeb.cloudfront.net/photos/pets/76738666/4/?bust=1750245379"
+      },
+      {
+        "small": "https://dl5zpyw5k3jeb.cloudfront.net/photos/pets/76738666/5/?bust=1750245380&width=100",
+        "medium": "https://dl5zpyw5k3jeb.cloudfront.net/photos/pets/76738666/5/?bust=1750245380&width=300",
+        "large": "https://dl5zpyw5k3jeb.cloudfront.net/photos/pets/76738666/5/?bust=1750245380&width=600",
+        "full": "https://dl5zpyw5k3jeb.cloudfront.net/photos/pets/76738666/5/?bust=1750245380"
+      },
+      {
+        "small": "https://dl5zpyw5k3jeb.cloudfront.net/photos/pets/76738666/6/?bust=1750245380&width=100",
+        "medium": "https://dl5zpyw5k3jeb.cloudfront.net/photos/pets/76738666/6/?bust=1750245380&width=300",
+        "large": "https://dl5zpyw5k3jeb.cloudfront.net/photos/pets/76738666/6/?bust=1750245380&width=600",
+        "full": "https://dl5zpyw5k3jeb.cloudfront.net/photos/pets/76738666/6/?bust=1750245380"
+      }
+    ],
+    "primary_photo_cropped": {
+      "small": "https://dl5zpyw5k3jeb.cloudfront.net/photos/pets/76738666/1/?bust=1750165552&width=300",
+      "medium": "https://dl5zpyw5k3jeb.cloudfront.net/photos/pets/76738666/1/?bust=1750165552&width=450",
+      "large": "https://dl5zpyw5k3jeb.cloudfront.net/photos/pets/76738666/1/?bust=1750165552&width=600",
+      "full": "https://dl5zpyw5k3jeb.cloudfront.net/photos/pets/76738666/1/?bust=1750165552"
+    },
+    "videos": [],
+    "status": "adoptable",
+    "status_changed_at": "2025-06-07T10:21:10+0000",
+    "published_at": "2025-06-07T10:21:03+0000",
+    "distance": 0.1891,
+    "contact": {
+      "email": "adopt@ophrescue.org",
+      "phone": null,
+      "address": {
+        "address1": "326 King St",
+        "address2": null,
+        "city": "Alexandria",
+        "state": "VA",
+        "postcode": "22314",
+        "country": "US"
+      }
+    },
+    "_links": {
+      "self": {
+        "href": "/v2/animals/76738666"
+      },
+      "type": {
+        "href": "/v2/types/dog"
+      },
+      "organization": {
+        "href": "/v2/organizations/va600"
+      }
+    }
+  },
+  {
+    "id": 76850107,
+    "organization_id": "VA600",
+    "url": "https://www.petfinder.com/dog/crouton-star-adoption-pending-star-76850107/va/alexandria/operation-paws-for-homes-va600/?referrer_id=41bf5875-18ad-4831-b3b5-3cace1f4568f&utm_source=api&utm_medium=partnership&utm_content=41bf5875-18ad-4831-b3b5-3cace1f4568f",
+    "type": "Dog",
+    "species": "Dog",
+    "breeds": {
+      "primary": "Mixed Breed",
+      "secondary": null,
+      "mixed": false,
+      "unknown": false
+    },
+    "colors": {
+      "primary": "Yellow / Tan / Blond / Fawn",
+      "secondary": null,
+      "tertiary": null
+    },
+    "age": "Adult",
+    "gender": "Male",
+    "size": "Medium",
+    "coat": null,
+    "attributes": {
+      "spayed_neutered": true,
+      "house_trained": false,
+      "declawed": null,
+      "special_needs": false,
+      "shots_current": true
+    },
+    "environment": {
+      "children": true,
+      "dogs": true,
+      "cats": true
+    },
+    "tags": [
+      "Good with Dogs",
+      "Good with Cats",
+      "Good with Kids"
+    ],
+    "name": "Crouton *Adoption Pending*",
+    "description": "Located in Bel Air, MD\n\nCrouton currently lives with a 9 year old boy, 4 dogs and 2 cats. He...",
+    "organization_animal_id": "OPFH-A-46360",
+    "photos": [
+      {
+        "small": "https://dl5zpyw5k3jeb.cloudfront.net/photos/pets/76850107/1/?bust=1752060301&width=100",
+        "medium": "https://dl5zpyw5k3jeb.cloudfront.net/photos/pets/76850107/1/?bust=1752060301&width=300",
+        "large": "https://dl5zpyw5k3jeb.cloudfront.net/photos/pets/76850107/1/?bust=1752060301&width=600",
+        "full": "https://dl5zpyw5k3jeb.cloudfront.net/photos/pets/76850107/1/?bust=1752060301"
+      },
+      {
+        "small": "https://dl5zpyw5k3jeb.cloudfront.net/photos/pets/76850107/2/?bust=1751966986&width=100",
+        "medium": "https://dl5zpyw5k3jeb.cloudfront.net/photos/pets/76850107/2/?bust=1751966986&width=300",
+        "large": "https://dl5zpyw5k3jeb.cloudfront.net/photos/pets/76850107/2/?bust=1751966986&width=600",
+        "full": "https://dl5zpyw5k3jeb.cloudfront.net/photos/pets/76850107/2/?bust=1751966986"
+      },
+      {
+        "small": "https://dl5zpyw5k3jeb.cloudfront.net/photos/pets/76850107/3/?bust=1751966988&width=100",
+        "medium": "https://dl5zpyw5k3jeb.cloudfront.net/photos/pets/76850107/3/?bust=1751966988&width=300",
+        "large": "https://dl5zpyw5k3jeb.cloudfront.net/photos/pets/76850107/3/?bust=1751966988&width=600",
+        "full": "https://dl5zpyw5k3jeb.cloudfront.net/photos/pets/76850107/3/?bust=1751966988"
+      },
+      {
+        "small": "https://dl5zpyw5k3jeb.cloudfront.net/photos/pets/76850107/4/?bust=1752060302&width=100",
+        "medium": "https://dl5zpyw5k3jeb.cloudfront.net/photos/pets/76850107/4/?bust=1752060302&width=300",
+        "large": "https://dl5zpyw5k3jeb.cloudfront.net/photos/pets/76850107/4/?bust=1752060302&width=600",
+        "full": "https://dl5zpyw5k3jeb.cloudfront.net/photos/pets/76850107/4/?bust=1752060302"
+      },
+      {
+        "small": "https://dl5zpyw5k3jeb.cloudfront.net/photos/pets/76850107/5/?bust=1752060303&width=100",
+        "medium": "https://dl5zpyw5k3jeb.cloudfront.net/photos/pets/76850107/5/?bust=1752060303&width=300",
+        "large": "https://dl5zpyw5k3jeb.cloudfront.net/photos/pets/76850107/5/?bust=1752060303&width=600",
+        "full": "https://dl5zpyw5k3jeb.cloudfront.net/photos/pets/76850107/5/?bust=1752060303"
+      },
+      {
+        "small": "https://dl5zpyw5k3jeb.cloudfront.net/photos/pets/76850107/6/?bust=1751375344&width=100",
+        "medium": "https://dl5zpyw5k3jeb.cloudfront.net/photos/pets/76850107/6/?bust=1751375344&width=300",
+        "large": "https://dl5zpyw5k3jeb.cloudfront.net/photos/pets/76850107/6/?bust=1751375344&width=600",
+        "full": "https://dl5zpyw5k3jeb.cloudfront.net/photos/pets/76850107/6/?bust=1751375344"
+      }
+    ],
+    "primary_photo_cropped": {
+      "small": "https://dl5zpyw5k3jeb.cloudfront.net/photos/pets/76850107/1/?bust=1752060301&width=300",
+      "medium": "https://dl5zpyw5k3jeb.cloudfront.net/photos/pets/76850107/1/?bust=1752060301&width=450",
+      "large": "https://dl5zpyw5k3jeb.cloudfront.net/photos/pets/76850107/1/?bust=1752060301&width=600",
+      "full": "https://dl5zpyw5k3jeb.cloudfront.net/photos/pets/76850107/1/?bust=1752060301"
+    },
+    "videos": [],
+    "status": "adoptable",
+    "status_changed_at": "2025-06-14T11:49:52+0000",
+    "published_at": "2025-06-14T11:49:38+0000",
+    "distance": 0.1891,
+    "contact": {
+      "email": "adopt@ophrescue.org",
+      "phone": null,
+      "address": {
+        "address1": "326 King St",
+        "address2": null,
+        "city": "Alexandria",
+        "state": "VA",
+        "postcode": "22314",
+        "country": "US"
+      }
+    },
+    "_links": {
+      "self": {
+        "href": "/v2/animals/76850107"
+      },
+      "type": {
+        "href": "/v2/types/dog"
+      },
+      "organization": {
+        "href": "/v2/organizations/va600"
+      }
+    }
+  }
+]

@@ -63,7 +63,7 @@ http_client = HttpClient(base_url="http://localhost:8000")
 
 
 def _construct_db_uri():
-    return "postgresql+asyncpg://postgres:postgres@0.0.0.0:5432/postgres"
+    return "postgresql+asyncpg://postgres:postgres@localhost:5432/postgres"
 
 
 @pytest.fixture(scope="session")
