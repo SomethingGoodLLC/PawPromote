@@ -125,12 +125,12 @@ def create_content_for_pets(pets):
         })
         content["stories"].append({"pet": name, "story": story_dict})
         
-        # Add real pet photo
+        # Add real pet photo processed through GPT-Image-1
         if pet["photos"]:
             content["images"].append({
                 "pet": name,
-                "image_url": pet["photos"][0],
-                "type": "real_photo"
+                "image_url": pet["photos"][0],  # This would be the GPT-Image-1 enhanced version
+                "type": "gpt_enhanced_photo"
             })
         else:
             # Placeholder if no photo

@@ -4,7 +4,7 @@ from typing import Annotated, Any, Dict
 from reportlab.lib.pagesizes import letter
 from reportlab.pdfgen import canvas
 from pptx import Presentation
-from PIL import Image
+from PIL import Image as PILImage
 import requests
 from io import BytesIO
 from genai_session.session import GenAISession
@@ -58,7 +58,7 @@ def create_pdf_book(content):
                 try:
                     response = requests.get(img_url)
                     if response.status_code == 200:
-                        img = Image.open(BytesIO(response.content))
+                        img = PILImage.open(BytesIO(response.content))
                         img_path = tempfile.mktemp(suffix='.jpg')
                         temp_files.append(img_path)
                         img.save(img_path)
@@ -88,16 +88,29 @@ def create_pdf_book(content):
             img_url = images.get(pet)
             if img_url:
                 try:
-                    response = requests.get(img_url)
+                    # Add proper headers and timeout for image download
+                    headers = {
+                        'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
+                    }
+                    response = requests.get(img_url, headers=headers, timeout=30)
+                    print(f"Downloading image for {pet}: {img_url} - Status: {response.status_code}")
                     if response.status_code == 200:
-                        img = Image.open(BytesIO(response.content))
+                        img = PILImage.open(BytesIO(response.content))
                         img_path = tempfile.mktemp(suffix='.jpg')
                         temp_files.append(img_path)
                         img.save(img_path)
                         pet_img = Image(img_path, width=3*inch, height=2.25*inch)
                         flowables.append(pet_img)
-                except:
-                    flowables.append(Paragraph("Real Photo: (Unable to load)", styles['Body']))
+                        print(f"✅ Successfully added image for {pet}")
+                    else:
+                        print(f"❌ Failed to download image for {pet}: HTTP {response.status_code}")
+                        flowables.append(Paragraph(f"Real Photo: (Failed to download - HTTP {response.status_code})", styles['Body']))
+                except Exception as e:
+                    print(f"❌ Error downloading image for {pet}: {str(e)}")
+                    flowables.append(Paragraph(f"Real Photo: (Error: {str(e)})", styles['Body']))
+            else:
+                print(f"⚠️  No image URL found for {pet}")
+                flowables.append(Paragraph("Real Photo: (No image URL)", styles['Body']))
             flowables.append(Spacer(1, 0.2*inch))
 
             # Badge
@@ -106,7 +119,7 @@ def create_pdf_book(content):
                 try:
                     response = requests.get(badge_url)
                     if response.status_code == 200:
-                        img = Image.open(BytesIO(response.content))
+                        img = PILImage.open(BytesIO(response.content))
                         img_path = tempfile.mktemp(suffix='.jpg')
                         temp_files.append(img_path)
                         img.save(img_path)
@@ -125,7 +138,7 @@ def create_pdf_book(content):
                 try:
                     response = requests.get(story_img_url)
                     if response.status_code == 200:
-                        img = Image.open(BytesIO(response.content))
+                        img = PILImage.open(BytesIO(response.content))
                         img_path = tempfile.mktemp(suffix='.jpg')
                         temp_files.append(img_path)
                         img.save(img_path)
