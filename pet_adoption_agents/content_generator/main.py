@@ -8,6 +8,7 @@ import vertexai
 from vertexai.preview.generative_models import GenerativeModel, Part
 from genai_session.session import GenAISession
 from genai_session.utils.context import GenAIContext
+import json
 
 AGENT_JWT = "PLACEHOLDER_JWT"  # Replace with actual JWT after registration
 session = GenAISession(jwt_token=AGENT_JWT)
@@ -28,16 +29,38 @@ def get_openai_client() -> OpenAI:
     return OpenAI(api_key=OPENAI_API_KEY)
 
 
-async def generate_story(pet: Dict[str, Any], humorous: bool = False) -> str:
+async def generate_story(pet: Dict[str, Any], humorous: bool = False) -> Dict[str, Any]:
     client = get_openai_client()
-    base_prompt = f"Create a heartwarming adventure story for {pet['name']} using real description: {pet['description']}. Include adoption CTA."
-    if humorous:
-        base_prompt = f"Create a funny, heartwarming adventure story for {pet['name']} using real description: {pet['description']}. Include puns, silly situations, and adoption CTA."
+    base_prompt = f"""Create a visually appealing, engaging pet story for {pet['name']} in JSON format. Follow this structure:
+    {{
+      "header": "Pet Name: Playful Title 🕵️‍♀️",
+      "subheader": "Short descriptor",
+      "paragraphs": ["Para1", "Para2", ...],
+      "badge": "Badge text 🔍",
+      "cta": "Call to action paragraph"
+    }}
+    
+    Use warm, playful, emotionally resonant language. Focus on personality traits, funny quirks, emotional aspects, relatable scenarios, transformations, and potential futures. Break into short paragraphs for readability.
+    
+    Example for a cat named Pepper:
+    {{
+      "header": "Pepper: Alexandria’s Curious Detective 🕵️‍♀️",
+      "subheader": "Cracking cases, charming hearts.",
+      "paragraphs": [
+        "Pepper isn’t your average black cat—she’s a sleuth extraordinaire! Each day, Pepper diligently investigates suspicious grocery bags and conducts thorough interrogations of unruly dust bunnies. She’s solved mysteries like “The Case of the Missing Treats,” earning her fame throughout Alexandria.",
+        "Pepper’s future family ideally enjoys mystery, excitement, and toy mice hidden cleverly in shoes."
+      ],
+      "badge": "Top Cat Detective 🔍",
+      "cta": "Ready to meet your new partner-in-crime-solving? Pepper awaits your companionship!"
+    }}
+    
+    Base on real description: {pet['description']}. {"Make it humorous with puns and silly situations if humorous else ''"} Include adoption CTA in cta."""
     response = client.chat.completions.create(
         model="gpt-4o",
-        messages=[{"role": "user", "content": base_prompt}]
+        messages=[{"role": "user", "content": base_prompt}],
+        response_format={"type": "json_object"}
     )
-    return response.choices[0].message.content
+    return json.loads(response.choices[0].message.content)
 
 
 async def generate_image(pet: Dict[str, Any], prompt_suffix: str = "promotional image") -> str:
@@ -79,8 +102,9 @@ async def generate_enhanced_image_from_photo(pet: Dict[str, Any], photo_url: Opt
         return await generate_image(pet, "promotional image")
 
 
-async def generate_badge(pet: Dict[str, Any]) -> str:
-    return await generate_image(pet, "status badge in a humorous style")
+async def generate_badge(pet: Dict[str, Any], badge_text: Optional[str] = None) -> str:
+    prompt_suffix = f"fun pet-related badge with text '{badge_text}'" if badge_text else "status badge in a humorous style"
+    return await generate_image(pet, prompt_suffix)
 
 
 async def generate_video_from_photo(pet: Dict[str, Any], photo_url: Optional[str], humorous: bool = False) -> str:
@@ -182,12 +206,12 @@ async def content_generator(
 ) -> Dict[str, Any]:
     agent_context.logger.info(f"Generating content for {len(pets)} pets with humorous={humorous}")
 
-    content = {"stories": [], "images": [], "story_images": [], "badges": [], "videos": []}
+    content = {"stories": [], "images": [], "story_images": [], "badges": [], "videos": [], "petfinder_urls": []}
 
     for pet in pets:
         # Generate story first
-        story = await generate_story(pet, humorous)
-        content["stories"].append({"pet": pet["name"], "story": story})
+        story_dict = await generate_story(pet, humorous)
+        content["stories"].append({"pet": pet["name"], "story": story_dict})
 
         # Use real Petfinder photo
         photo_url = pet.get("photos", [None])[0] if "photos" in pet else None
@@ -199,16 +223,19 @@ async def content_generator(
             content["images"].append({"pet": pet["name"], "image_url": basic_image_url, "type": "generated_basic"})
 
         # Generate story-specific image using GPT-Image-1
-        story_image_url = await generate_story_image(pet, story, photo_url)
+        story_image_url = await generate_story_image(pet, str(story_dict), photo_url)  # Pass story_dict as string or adjust
         content["story_images"].append({"pet": pet["name"], "image_url": story_image_url, "type": "story_specific"})
 
-        # Generate badge
-        badge_url = await generate_badge(pet)
+        # Generate badge using badge text from story
+        badge_url = await generate_badge(pet, story_dict.get("badge"))
         content["badges"].append({"pet": pet["name"], "badge_url": badge_url})
 
         # Generate video from real photo
         video_url = await generate_video_from_photo(pet, photo_url, humorous)
         content["videos"].append({"pet": pet["name"], "video_url": video_url})
+
+        # Add Petfinder URL
+        content["petfinder_urls"].append({"pet": pet["name"], "url": pet.get("url", "")})
 
     return content
 

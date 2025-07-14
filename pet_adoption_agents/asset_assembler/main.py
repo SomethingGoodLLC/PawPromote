@@ -15,6 +15,11 @@ import tempfile
 import qrcode
 from pptx.util import Inches
 
+from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer, Image, PageBreak
+from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
+from reportlab.lib import colors
+from reportlab.lib.units import inch
+
 AGENT_JWT = "PLACEHOLDER_JWT"  # Replace with actual JWT after registration
 session = GenAISession(jwt_token=AGENT_JWT)
 
@@ -25,60 +30,61 @@ def create_pdf_book(content):
     story_images = {img['pet']: img['image_url'] for img in content.get("story_images", [])}
     badges = {b['pet']: b['badge_url'] for b in content["badges"]}
     videos = {v['pet']: v['video_url'] for v in content["videos"]}
+    petfinder_urls = {p['pet']: p['url'] for p in content.get("petfinder_urls", [])}
     is_multi = len(stories) > 1
+
+    # Track temporary files for cleanup
+    temp_files = []
+
     with tempfile.NamedTemporaryFile(suffix='.pdf', delete=False) as tmp_pdf:
-        c = canvas.Canvas(tmp_pdf.name, pagesize=letter)
+        doc = SimpleDocTemplate(tmp_pdf.name, pagesize=letter, rightMargin=72, leftMargin=72, topMargin=72, bottomMargin=36)
+        flowables = []
+
+        styles = getSampleStyleSheet()
+        styles.add(ParagraphStyle(name='Header', fontSize=24, leading=28, alignment=1, spaceAfter=20, fontName='Helvetica-Bold', textColor=colors.darkblue))
+        styles.add(ParagraphStyle(name='Subheader', fontSize=14, leading=16, alignment=0, spaceAfter=10, textColor=colors.grey))
+        styles.add(ParagraphStyle(name='Body', fontSize=12, leading=14, spaceAfter=10))
+        styles.add(ParagraphStyle(name='CTA', fontSize=12, leading=14, spaceAfter=20, fontName='Helvetica-Oblique', textColor=colors.green))
+
         # Cover page
-        c.setFont("Helvetica-Bold", 24)
-        c.drawString(100, 750, "Pet Adoption Stories")
-        c.setFont("Helvetica", 12)
-        c.drawString(100, 720, "Featuring Real Pets from Alexandria, VA")
-        if not is_multi and stories:
+        flowables.append(Paragraph("Forever Friends: Adoption Stories from Alexandria's Cutest Companions", styles['Header']))
+        flowables.append(Spacer(1, 0.2*inch))
+        flowables.append(Paragraph("Their Stories Await Your Love.", styles['Subheader']))
+        flowables.append(Spacer(1, 0.5*inch))
+        if stories:
             pet = stories[0]['pet']
             img_url = images.get(pet)
             if img_url:
-                response = requests.get(img_url)
-                img = Image.open(BytesIO(response.content))
-                img_path = tempfile.mktemp(suffix='.jpg')
-                img.save(img_path)
-                c.drawImage(img_path, 100, 400, width=400, height=300)
-                os.remove(img_path)
-        else:
-            # For multi, add first pet's photo as cover
-            if stories:
-                pet = stories[0]['pet']
-                img_url = images.get(pet)
-                if img_url:
+                try:
                     response = requests.get(img_url)
-                    img = Image.open(BytesIO(response.content))
-                    img_path = tempfile.mktemp(suffix='.jpg')
-                    img.save(img_path)
-                    c.drawImage(img_path, 100, 400, width=400, height=300)
-                    os.remove(img_path)
-        c.showPage()
-        # Chapters
+                    if response.status_code == 200:
+                        img = Image.open(BytesIO(response.content))
+                        img_path = tempfile.mktemp(suffix='.jpg')
+                        temp_files.append(img_path)
+                        img.save(img_path)
+                        cover_img = Image(img_path, width=4*inch, height=3*inch)
+                        flowables.append(cover_img)
+                except:
+                    pass
+        flowables.append(PageBreak())
+
+        # Table of Contents
+        flowables.append(Paragraph("Table of Contents", styles['Header']))
+        flowables.append(Spacer(1, 0.2*inch))
+        for s in stories:
+            header = s['story']['header']
+            flowables.append(Paragraph(header, styles['Body']))
+        flowables.append(PageBreak())
+
+        # Pet stories
         for story in stories:
             pet = story['pet']
-            c.setFont("Helvetica-Bold", 18)
-            title = f"{pet}'s Adventure" if not is_multi else f"Chapter: {pet}'s Adventure"
-            c.drawString(100, 750, title)
-            y = 700
-            c.setFont("Helvetica", 12)
-            story_text = story['story'].replace('\n', ' ')
-            # Simple text wrapping (for demo)
-            words = story_text.split()
-            line = ''
-            for word in words:
-                if len(line) + len(word) > 80:
-                    c.drawString(100, y, line)
-                    y -= 15
-                    line = word + ' '
-                else:
-                    line += word + ' '
-            if line:
-                c.drawString(100, y, line)
-                y -= 30
-            # Real pet photo
+            story_dict = story['story']
+            flowables.append(Paragraph(story_dict['header'], styles['Header']))
+            flowables.append(Paragraph(story_dict['subheader'], styles['Subheader']))
+            flowables.append(Spacer(1, 0.2*inch))
+
+            # Real photo
             img_url = images.get(pet)
             if img_url:
                 try:
@@ -86,66 +92,80 @@ def create_pdf_book(content):
                     if response.status_code == 200:
                         img = Image.open(BytesIO(response.content))
                         img_path = tempfile.mktemp(suffix='.jpg')
+                        temp_files.append(img_path)
                         img.save(img_path)
-                        c.drawString(100, y - 20, "Real Photo:")
-                        c.drawImage(img_path, 100, y - 170, width=200, height=150)
-                        os.remove(img_path)
-                        y -= 190
-                except Exception as e:
-                    c.drawString(100, y - 20, f"Real Photo: (Unable to load)")
-                    y -= 40
-            # Story-specific image
-            story_img_url = story_images.get(pet)
-            if story_img_url and not story_img_url.startswith("https://generated-story-image.example.com"):
-                try:
-                    response = requests.get(story_img_url)
-                    if response.status_code == 200:
-                        img = Image.open(BytesIO(response.content))
-                        img_path = tempfile.mktemp(suffix='.jpg')
-                        img.save(img_path)
-                        c.drawString(100, y - 20, "Story Illustration:")
-                        c.drawImage(img_path, 320, y - 170, width=200, height=150)
-                        os.remove(img_path)
-                        y -= 190
-                except Exception as e:
-                    c.drawString(100, y - 20, f"Story Illustration: (Would be generated by GPT-Image-1)")
-                    y -= 40
-            elif story_img_url:
-                c.drawString(100, y - 20, f"Story Illustration: (Would be generated by GPT-Image-1)")
-                y -= 40
+                        pet_img = Image(img_path, width=3*inch, height=2.25*inch)
+                        flowables.append(pet_img)
+                except:
+                    flowables.append(Paragraph("Real Photo: (Unable to load)", styles['Body']))
+            flowables.append(Spacer(1, 0.2*inch))
+
             # Badge
             badge_url = badges.get(pet)
-            if badge_url and not badge_url.startswith("https://generated-badge.example.com"):
+            if badge_url:
                 try:
                     response = requests.get(badge_url)
                     if response.status_code == 200:
                         img = Image.open(BytesIO(response.content))
                         img_path = tempfile.mktemp(suffix='.jpg')
+                        temp_files.append(img_path)
                         img.save(img_path)
-                        c.drawImage(img_path, 100, y - 100, width=100, height=100)
-                        os.remove(img_path)
-                        y -= 120
-                except Exception as e:
-                    c.drawString(100, y - 20, f"Badge: (Would be generated)")
-                    y -= 40
-            elif badge_url:
-                c.drawString(100, y - 20, f"Badge: (Would be generated)")
-                y -= 40
-            # Video QR
-            video_url = videos.get(pet)
-            if video_url:
+                        badge_img = Image(img_path, width=1*inch, height=1*inch)
+                        flowables.append(badge_img)
+                except:
+                    flowables.append(Paragraph("Badge: (Unable to load)", styles['Body']))
+
+            # Story paragraphs
+            for para in story_dict['paragraphs']:
+                flowables.append(Paragraph(para, styles['Body']))
+
+            # Illustration
+            story_img_url = story_images.get(pet)
+            if story_img_url:
+                try:
+                    response = requests.get(story_img_url)
+                    if response.status_code == 200:
+                        img = Image.open(BytesIO(response.content))
+                        img_path = tempfile.mktemp(suffix='.jpg')
+                        temp_files.append(img_path)
+                        img.save(img_path)
+                        story_img = Image(img_path, width=3*inch, height=2.25*inch)
+                        flowables.append(story_img)
+                except:
+                    flowables.append(Paragraph("Story Illustration: (Unable to load)", styles['Body']))
+            flowables.append(Spacer(1, 0.2*inch))
+
+            # CTA
+            flowables.append(Paragraph(story_dict['cta'], styles['CTA']))
+
+            # QR code linking to Petfinder page
+            petfinder_url = petfinder_urls.get(pet)
+            if petfinder_url:
                 qr = qrcode.QRCode()
-                qr.add_data(video_url)
+                qr.add_data(petfinder_url)
                 qr.make(fit=True)
                 qr_img = qr.make_image(fill_color="black", back_color="white")
                 qr_path = tempfile.mktemp(suffix='.png')
+                temp_files.append(qr_path)
                 qr_img.save(qr_path)
-                c.drawString(100, y - 20, "Scan to watch video:")
-                c.drawImage(qr_path, 100, y - 120, width=100, height=100)
-                os.remove(qr_path)
-                y -= 140
-            c.showPage()
-        c.save()
+                flowables.append(Paragraph("Scan to Learn More About " + pet + " on Petfinder!", styles['Body']))
+                flowables.append(Image(qr_path, width=1*inch, height=1*inch))
+
+            flowables.append(PageBreak())
+
+        # Back page
+        flowables.append(Paragraph("Adoption Instructions", styles['Header']))
+        flowables.append(Paragraph("To adopt one of these wonderful pets, contact the Alexandria shelter at adoption@alexandriashelter.org or visit our website for the adoption process.", styles['Body']))
+
+        doc.build(flowables)
+        
+        # Clean up temporary files
+        for temp_file in temp_files:
+            try:
+                os.remove(temp_file)
+            except:
+                pass
+                
     return tmp_pdf.name
 
 def create_ppt(content):
@@ -154,6 +174,7 @@ def create_ppt(content):
     story_images = {img['pet']: img['image_url'] for img in content.get("story_images", [])}
     badges = {b['pet']: b['badge_url'] for b in content["badges"]}
     videos = {v['pet']: v['video_url'] for v in content["videos"]}
+    petfinder_urls = {p['pet']: p['url'] for p in content.get("petfinder_urls", [])}
     prs = Presentation()
     # Title slide
     slide = prs.slides.add_slide(prs.slide_layouts[0])
@@ -163,11 +184,20 @@ def create_ppt(content):
     subtitle.text = "Real Pets from Alexandria, VA Looking for Forever Homes"
     for story in stories:
         pet = story['pet']
+        story_dict = story['story']
         slide = prs.slides.add_slide(prs.slide_layouts[1])
         title = slide.shapes.title
-        title.text = f"{pet}'s Story"
+        title.text = story_dict['header']
         content_placeholder = slide.placeholders[1]
-        content_placeholder.text = story['story']
+        
+        # Format story content for PowerPoint
+        story_text = story_dict['subheader'] + "\n\n"
+        for para in story_dict['paragraphs']:
+            story_text += para + "\n\n"
+        story_text += story_dict['cta']
+        
+        content_placeholder.text = story_text
+        
         # Real pet photo
         img_url = images.get(pet)
         if img_url:
@@ -231,17 +261,17 @@ def create_ppt(content):
             text_frame = textbox.text_frame
             p = text_frame.add_paragraph()
             p.text = "Badge\n(Generated)"
-        # Video link - add as text box with hyperlink
-        video_url = videos.get(pet)
-        if video_url:
-            # Add text box for video link
+        # Petfinder link - add as text box with hyperlink
+        petfinder_url = petfinder_urls.get(pet)
+        if petfinder_url:
+            # Add text box for Petfinder link
             textbox = slide.shapes.add_textbox(Inches(1), Inches(5.5), Inches(8), Inches(1))
             text_frame = textbox.text_frame
             p = text_frame.add_paragraph()
             r = p.add_run()
-            r.text = f"Watch {pet}'s video: {video_url}"
+            r.text = f"Learn more about {pet} on Petfinder: {petfinder_url}"
             hlink = r.hyperlink
-            hlink.address = video_url
+            hlink.address = petfinder_url
     with tempfile.NamedTemporaryFile(suffix='.pptx', delete=False) as tmp_ppt:
         prs.save(tmp_ppt.name)
     return tmp_ppt.name
