@@ -1,0 +1,19 @@
+[project]
+name = "pet-adoption-agent"
+version = "0.1.0"
+description = "Agent for pet adoption workflow"
+authors = ["Your Name <your.email@example.com>"]
+dependencies = [
+  "genai-protocol",
+  "requests",
+  "openai",
+  "beautifulsoup4",
+  "reportlab",
+  "python-pptx",
+  "pillow",
+  "google-cloud-aiplatform",
+]
+requires-python = ">=3.10"
+
+[tool.uv]
+managed = true 
