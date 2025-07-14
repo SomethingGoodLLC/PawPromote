@@ -43,7 +43,60 @@ def load_alexandria_pets():
     return pets
 
 def create_content_for_pets(pets):
-    """Create content structure with real pet data and humorous stories"""
+    """Create content structure using the actual content generator with AI images"""
+    
+    # Import the actual content generator
+    import sys
+    import os
+    sys.path.append(os.path.join(os.path.dirname(__file__), 'content_generator'))
+    
+    # Mock the GenAI context for testing
+    class MockGenAIContext:
+        class MockLogger:
+            def info(self, msg):
+                print(f"INFO: {msg}")
+            def error(self, msg):
+                print(f"ERROR: {msg}")
+        
+        def __init__(self):
+            self.logger = self.MockLogger()
+    
+    # Convert pets to the format expected by content generator
+    formatted_pets = []
+    for pet in pets:
+        formatted_pet = {
+            "name": pet["name"],
+            "type": pet["type"],
+            "breeds": {"primary": pet["breed"]},
+            "age": pet["age"],
+            "gender": pet["gender"],
+            "colors": {"primary": pet.get("color", "Mixed")},  # Default color if not available
+            "description": pet["description"],
+            "photos": pet["photos"],
+            "url": pet["url"]
+        }
+        formatted_pets.append(formatted_pet)
+    
+    # Try to use the actual content generator
+    try:
+        import asyncio
+        from content_generator.main import content_generator
+        
+        # Run the content generator
+        mock_context = MockGenAIContext()
+        content = asyncio.run(content_generator(mock_context, formatted_pets, humorous=True))
+        
+        print("✅ Used actual content generator with AI image processing")
+        return content
+        
+    except Exception as e:
+        print(f"⚠️  Content generator failed ({e}), using fallback structure")
+        # Fallback to the existing hardcoded structure
+        return create_fallback_content(pets)
+
+
+def create_fallback_content(pets):
+    """Fallback content structure with real pet data and humorous stories"""
     
     # Humorous adventure stories for each pet - structured format
     story_templates = {
@@ -98,69 +151,81 @@ def create_content_for_pets(pets):
                 "Crouton, the golden food critic, earned his name after a legendary incident involving a salad bar and his insatiable curiosity about human food. He's since become the shelter's official taste-tester and dining experience coordinator.",
                 "His latest review: 'The morning kibble shows remarkable consistency with hints of chicken and a robust crunch - 4.5 paws out of 5.' He's established a waiting list for his exclusive 'Dinner and a Movie' nights. Crouton is seeking a family who appreciates fine dining and needs a professional food quality inspector."
             ],
-            "badge": "Master Food Critic 🏆",
-            "cta": "Ready for gourmet dining experiences? Crouton will elevate your meals to restaurant quality!"
+            "badge": "Food Quality Inspector 🍴",
+            "cta": "Need a professional food critic? Crouton is ready to review your kitchen and steal your heart!"
         }
     }
     
+    # Create content structure
     content = {
         "stories": [],
         "images": [],
+        "original_photos": [],
+        "enhanced_images": [],
         "story_images": [],
+        "ghibli_images": [],
         "badges": [],
         "videos": [],
         "petfinder_urls": []
     }
     
     for pet in pets:
-        name = pet["name"]
-        
-        # Add structured story
-        story_dict = story_templates.get(name, {
-            "header": f"{name}: Amazing Pet 🐾",
-            "subheader": "Looking for a loving home.",
-            "paragraphs": [f"{name} is an amazing {pet['type'].lower()} looking for a loving home!"],
-            "badge": "Great Pet 🌟",
-            "cta": f"Ready to meet {name}? Contact us today!"
+        # Add story
+        pet_story = story_templates.get(pet["name"], {
+            "header": f"{pet['name']}: The Amazing {pet['type'].title()}",
+            "subheader": "Ready for adventure and love.",
+            "paragraphs": [f"{pet['name']} is looking for a loving home where they can share their amazing personality."],
+            "badge": "Amazing Pet 🌟",
+            "cta": f"Ready to meet {pet['name']}? Contact the shelter today!"
         })
-        content["stories"].append({"pet": name, "story": story_dict})
+        content["stories"].append({"pet": pet["name"], "story": pet_story})
         
-        # Add real pet photo processed through GPT-Image-1
+        # Add original photo
         if pet["photos"]:
-            content["images"].append({
-                "pet": name,
-                "image_url": pet["photos"][0],  # This would be the GPT-Image-1 enhanced version
-                "type": "gpt_enhanced_photo"
+            content["original_photos"].append({
+                "pet": pet["name"],
+                "image_url": pet["photos"][0],
+                "type": "original_petfinder"
             })
-        else:
-            # Placeholder if no photo
             content["images"].append({
-                "pet": name,
-                "image_url": f"https://placeholder.pet.photo/{name.lower()}.jpg",
-                "type": "placeholder"
+                "pet": pet["name"],
+                "image_url": pet["photos"][0],
+                "type": "original_petfinder"
             })
         
-        # Add story-specific image (simulated GPT-Image-1 generation)
+        # Add placeholder AI images (will show as placeholders requiring API key)
+        content["enhanced_images"].append({
+            "pet": pet["name"],
+            "image_url": f"https://example.com/{pet['name'].lower()}_enhanced.jpg",
+            "type": "gpt_enhanced_creative"
+        })
+        
         content["story_images"].append({
-            "pet": name,
-            "image_url": f"https://generated-story-image.example.com/{name.lower()}_adventure.jpg",
-            "type": "story_specific"
+            "pet": pet["name"],
+            "image_url": f"https://example.com/{pet['name'].lower()}_story.jpg",
+            "type": "gpt_story_specific"
         })
         
-        # Add badge and video
+        content["ghibli_images"].append({
+            "pet": pet["name"],
+            "image_url": f"https://example.com/{pet['name'].lower()}_ghibli.jpg",
+            "type": "gpt_ghibli_style"
+        })
+        
+        # Add other content
         content["badges"].append({
-            "pet": name,
-            "badge_url": f"https://generated-badge.example.com/{name.lower()}_badge.jpg"
-        })
-        content["videos"].append({
-            "pet": name,
-            "video_url": f"https://generated-video.example.com/{name.lower()}_video.mp4"
+            "pet": pet["name"],
+            "badge_url": f"https://example.com/{pet['name'].lower()}_badge.jpg"
         })
         
-        # Add Petfinder URL
+        content["videos"].append({
+            "pet": pet["name"],
+            "video_url": f"https://example.com/{pet['name'].lower()}_video.mp4"
+        })
+        
         content["petfinder_urls"].append({
-            "pet": name,
-            "url": pet.get("url", "")
+            "pet": pet["name"],
+            "url": pet["url"]
         })
     
     return content
@@ -212,9 +277,9 @@ def main():
         pdf_path = create_pdf_book(content)
         pdf_size = os.path.getsize(pdf_path)
         
-        print("   🎭 Creating PowerPoint presentation...")
-        ppt_path = create_ppt(content)
-        ppt_size = os.path.getsize(ppt_path)
+        print("   ⏭️  Skipping PowerPoint presentation (as requested)...")
+        ppt_path = None
+        ppt_size = 0
         
         # Results summary
         print("\n" + "=" * 70)
@@ -225,9 +290,12 @@ def main():
         print(f"   📏 Size: {pdf_size:,} bytes")
         print(f"   📄 Pages: Cover + {len(pets)} chapters")
         
-        print(f"\n🎭 PowerPoint: {ppt_path}")
-        print(f"   📏 Size: {ppt_size:,} bytes")
-        print(f"   🎬 Slides: Title + {len(pets)} pet stories")
+        if ppt_path:
+            print(f"\n🎭 PowerPoint: {ppt_path}")
+            print(f"   📏 Size: {ppt_size:,} bytes")
+            print(f"   🎬 Slides: Title + {len(pets)} pet stories")
+        else:
+            print(f"\n🎭 PowerPoint: Skipped (as requested)")
         
         print(f"\n🐾 Featured Pets:")
         for i, pet in enumerate(pets, 1):

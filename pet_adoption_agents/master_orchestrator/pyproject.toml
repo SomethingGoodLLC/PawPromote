@@ -1,17 +1,22 @@
 [project]
-name = "pet-adoption-agent"
+name = "pet-adoption-master-orchestrator"
 version = "0.1.0"
-description = "Agent for pet adoption workflow"
+description = "Master orchestrator agent for pet adoption workflow coordination"
 authors = ["Your Name <your.email@example.com>"]
 dependencies = [
   "genai-protocol",
   "requests",
+  "httpx",
+  "aiohttp",
   "openai",
   "beautifulsoup4",
   "reportlab",
   "python-pptx",
   "pillow",
   "google-cloud-aiplatform",
+  "pydantic",
+  "python-dotenv",
+  "typing-extensions",
   "pytest>=8.4.1",
   "pytest-asyncio>=1.0.0",
 ]

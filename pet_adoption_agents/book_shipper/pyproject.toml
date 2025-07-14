@@ -1,17 +1,22 @@
 [project]
-name = "pet-adoption-agent"
+name = "pet-adoption-book-shipper"
 version = "0.1.0"
-description = "Agent for pet adoption workflow"
+description = "Book shipping agent for pet adoption workflow with Lulu API integration"
 authors = ["Your Name <your.email@example.com>"]
 dependencies = [
   "genai-protocol",
   "requests",
+  "httpx",
+  "aiohttp",
   "openai",
   "beautifulsoup4",
   "reportlab",
   "python-pptx",
   "pillow",
   "google-cloud-aiplatform",
+  "pydantic",
+  "python-dotenv",
+  "typing-extensions",
 ]
 requires-python = ">=3.10"
 

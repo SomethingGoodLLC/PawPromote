@@ -27,7 +27,10 @@ session = GenAISession(jwt_token=AGENT_JWT)
 def create_pdf_book(content):
     stories = content["stories"]
     images = {img['pet']: img['image_url'] for img in content["images"]}
+    original_photos = {img['pet']: img['image_url'] for img in content.get("original_photos", [])}
+    enhanced_images = {img['pet']: img['image_url'] for img in content.get("enhanced_images", [])}
     story_images = {img['pet']: img['image_url'] for img in content.get("story_images", [])}
+    ghibli_images = {img['pet']: img['image_url'] for img in content.get("ghibli_images", [])}
     badges = {b['pet']: b['badge_url'] for b in content["badges"]}
     videos = {v['pet']: v['video_url'] for v in content["videos"]}
     petfinder_urls = {p['pet']: p['url'] for p in content.get("petfinder_urls", [])}
@@ -35,6 +38,49 @@ def create_pdf_book(content):
 
     # Track temporary files for cleanup
     temp_files = []
+
+    def download_and_add_image(img_url, pet_name, image_type, width=3*inch, height=2.25*inch):
+        """Helper function to download and add images to the PDF"""
+        if not img_url:
+            return None
+            
+        try:
+            # Skip placeholder URLs
+            if img_url.startswith("https://example.com"):
+                flowables.append(Paragraph(f"{image_type}: (Placeholder - requires valid OpenAI API key)", styles['Body']))
+                return None
+            
+            # Check if it's a local file path
+            if os.path.exists(img_url):
+                print(f"Using local image file {image_type} for {pet_name}: {img_url}")
+                img = PILImage.open(img_url)
+                # For local files, we can use them directly
+                pet_img = Image(img_url, width=width, height=height)
+                flowables.append(pet_img)
+                print(f"✅ Successfully added {image_type} for {pet_name}")
+            else:
+                # Download from URL
+                headers = {
+                    'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
+                }
+                response = requests.get(img_url, headers=headers, timeout=30)
+                print(f"Downloading {image_type} for {pet_name}: {img_url} - Status: {response.status_code}")
+                
+                if response.status_code == 200:
+                    img = PILImage.open(BytesIO(response.content))
+                    img_path = tempfile.mktemp(suffix='.jpg')
+                    temp_files.append(img_path)
+                    img.save(img_path)
+                    pet_img = Image(img_path, width=width, height=height)
+                    flowables.append(pet_img)
+                    print(f"✅ Successfully added {image_type} for {pet_name}")
+                else:
+                    flowables.append(Paragraph(f"{image_type}: (Failed to download - HTTP {response.status_code})", styles['Body']))
+                    return None
+        except Exception as e:
+            print(f"❌ Error downloading {image_type} for {pet_name}: {str(e)}")
+            flowables.append(Paragraph(f"{image_type}: (Error: {str(e)})", styles['Body']))
+            return None
 
     with tempfile.NamedTemporaryFile(suffix='.pdf', delete=False) as tmp_pdf:
         doc = SimpleDocTemplate(tmp_pdf.name, pagesize=letter, rightMargin=72, leftMargin=72, topMargin=72, bottomMargin=36)
@@ -45,6 +91,7 @@ def create_pdf_book(content):
         styles.add(ParagraphStyle(name='Subheader', fontSize=14, leading=16, alignment=0, spaceAfter=10, textColor=colors.grey))
         styles.add(ParagraphStyle(name='Body', fontSize=12, leading=14, spaceAfter=10))
         styles.add(ParagraphStyle(name='CTA', fontSize=12, leading=14, spaceAfter=20, fontName='Helvetica-Oblique', textColor=colors.green))
+        styles.add(ParagraphStyle(name='ImageLabel', fontSize=10, leading=12, spaceAfter=5, fontName='Helvetica-Bold', textColor=colors.darkblue))
 
         # Cover page
         flowables.append(Paragraph("Forever Friends: Adoption Stories from Alexandria's Cutest Companions", styles['Header']))
@@ -53,19 +100,10 @@ def create_pdf_book(content):
         flowables.append(Spacer(1, 0.5*inch))
         if stories:
             pet = stories[0]['pet']
-            img_url = images.get(pet)
-            if img_url:
-                try:
-                    response = requests.get(img_url)
-                    if response.status_code == 200:
-                        img = PILImage.open(BytesIO(response.content))
-                        img_path = tempfile.mktemp(suffix='.jpg')
-                        temp_files.append(img_path)
-                        img.save(img_path)
-                        cover_img = Image(img_path, width=4*inch, height=3*inch)
-                        flowables.append(cover_img)
-                except:
-                    pass
+            # Use enhanced image for cover if available, otherwise original
+            cover_img_url = enhanced_images.get(pet) or original_photos.get(pet) or images.get(pet)
+            if cover_img_url:
+                download_and_add_image(cover_img_url, pet, "Cover Photo", width=4*inch, height=3*inch)
         flowables.append(PageBreak())
 
         # Table of Contents
@@ -84,38 +122,33 @@ def create_pdf_book(content):
             flowables.append(Paragraph(story_dict['subheader'], styles['Subheader']))
             flowables.append(Spacer(1, 0.2*inch))
 
-            # Real photo
-            img_url = images.get(pet)
-            if img_url:
-                try:
-                    # Add proper headers and timeout for image download
-                    headers = {
-                        'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
-                    }
-                    response = requests.get(img_url, headers=headers, timeout=30)
-                    print(f"Downloading image for {pet}: {img_url} - Status: {response.status_code}")
-                    if response.status_code == 200:
-                        img = PILImage.open(BytesIO(response.content))
-                        img_path = tempfile.mktemp(suffix='.jpg')
-                        temp_files.append(img_path)
-                        img.save(img_path)
-                        pet_img = Image(img_path, width=3*inch, height=2.25*inch)
-                        flowables.append(pet_img)
-                        print(f"✅ Successfully added image for {pet}")
-                    else:
-                        print(f"❌ Failed to download image for {pet}: HTTP {response.status_code}")
-                        flowables.append(Paragraph(f"Real Photo: (Failed to download - HTTP {response.status_code})", styles['Body']))
-                except Exception as e:
-                    print(f"❌ Error downloading image for {pet}: {str(e)}")
-                    flowables.append(Paragraph(f"Real Photo: (Error: {str(e)})", styles['Body']))
-            else:
-                print(f"⚠️  No image URL found for {pet}")
-                flowables.append(Paragraph("Real Photo: (No image URL)", styles['Body']))
+            # 1. Original Petfinder Photo
+            flowables.append(Paragraph("📸 Original Petfinder Photo", styles['ImageLabel']))
+            original_url = original_photos.get(pet)
+            download_and_add_image(original_url, pet, "Original Photo")
+            flowables.append(Spacer(1, 0.1*inch))
+
+            # 2. GPT-Image-1 Enhanced Creative Photo
+            flowables.append(Paragraph("🎨 GPT-Image-1 Enhanced Creative Photo", styles['ImageLabel']))
+            enhanced_url = enhanced_images.get(pet)
+            download_and_add_image(enhanced_url, pet, "Enhanced Creative Photo")
+            flowables.append(Spacer(1, 0.1*inch))
+
+            # 3. GPT-Image-1 Story-Specific Image
+            flowables.append(Paragraph("📖 GPT-Image-1 Story-Specific Image", styles['ImageLabel']))
+            story_url = story_images.get(pet)
+            download_and_add_image(story_url, pet, "Story-Specific Image")
+            flowables.append(Spacer(1, 0.1*inch))
+
+            # 4. GPT-Image-1 Ghibli-Style Image
+            flowables.append(Paragraph("🌸 GPT-Image-1 Ghibli-Style Image", styles['ImageLabel']))
+            ghibli_url = ghibli_images.get(pet)
+            download_and_add_image(ghibli_url, pet, "Ghibli-Style Image")
             flowables.append(Spacer(1, 0.2*inch))
 
             # Badge
             badge_url = badges.get(pet)
-            if badge_url:
+            if badge_url and not badge_url.startswith("https://example.com"):
                 try:
                     response = requests.get(badge_url)
                     if response.status_code == 200:
@@ -123,63 +156,53 @@ def create_pdf_book(content):
                         img_path = tempfile.mktemp(suffix='.jpg')
                         temp_files.append(img_path)
                         img.save(img_path)
-                        badge_img = Image(img_path, width=1*inch, height=1*inch)
+                        badge_img = Image(img_path, width=2*inch, height=1*inch)
                         flowables.append(badge_img)
                 except:
-                    flowables.append(Paragraph("Badge: (Unable to load)", styles['Body']))
+                    pass
+            else:
+                flowables.append(Paragraph("Badge: (Unable to load)", styles['Body']))
 
-            # Story paragraphs
-            for para in story_dict['paragraphs']:
-                flowables.append(Paragraph(para, styles['Body']))
-
-            # Illustration
-            story_img_url = story_images.get(pet)
-            if story_img_url:
-                try:
-                    response = requests.get(story_img_url)
-                    if response.status_code == 200:
-                        img = PILImage.open(BytesIO(response.content))
-                        img_path = tempfile.mktemp(suffix='.jpg')
-                        temp_files.append(img_path)
-                        img.save(img_path)
-                        story_img = Image(img_path, width=3*inch, height=2.25*inch)
-                        flowables.append(story_img)
-                except:
-                    flowables.append(Paragraph("Story Illustration: (Unable to load)", styles['Body']))
+            # Story content
+            for paragraph in story_dict['paragraphs']:
+                flowables.append(Paragraph(paragraph, styles['Body']))
             flowables.append(Spacer(1, 0.2*inch))
 
             # CTA
             flowables.append(Paragraph(story_dict['cta'], styles['CTA']))
+            flowables.append(Spacer(1, 0.2*inch))
 
-            # QR code linking to Petfinder page
+            # QR Code for Petfinder
             petfinder_url = petfinder_urls.get(pet)
             if petfinder_url:
-                qr = qrcode.QRCode()
-                qr.add_data(petfinder_url)
-                qr.make(fit=True)
-                qr_img = qr.make_image(fill_color="black", back_color="white")
-                qr_path = tempfile.mktemp(suffix='.png')
-                temp_files.append(qr_path)
-                qr_img.save(qr_path)
-                flowables.append(Paragraph("Scan to Learn More About " + pet + " on Petfinder!", styles['Body']))
-                flowables.append(Image(qr_path, width=1*inch, height=1*inch))
+                flowables.append(Paragraph(f"Scan to Learn More About {pet} on Petfinder!", styles['Body']))
+                try:
+                    qr = qrcode.QRCode(version=1, box_size=5, border=5)
+                    qr.add_data(petfinder_url)
+                    qr.make(fit=True)
+                    qr_img = qr.make_image(fill_color="black", back_color="white")
+                    qr_path = tempfile.mktemp(suffix='.png')
+                    temp_files.append(qr_path)
+                    qr_img.save(qr_path)
+                    qr_image = Image(qr_path, width=1.5*inch, height=1.5*inch)
+                    flowables.append(qr_image)
+                except:
+                    flowables.append(Paragraph(f"QR Code: (Unable to generate)", styles['Body']))
 
-            flowables.append(PageBreak())
+            if story != stories[-1]:  # Not the last story
+                flowables.append(PageBreak())
 
-        # Back page
-        flowables.append(Paragraph("Adoption Instructions", styles['Header']))
-        flowables.append(Paragraph("To adopt one of these wonderful pets, contact the Alexandria shelter at adoption@alexandriashelter.org or visit our website for the adoption process.", styles['Body']))
-
+        # Build PDF
         doc.build(flowables)
         
         # Clean up temporary files
         for temp_file in temp_files:
             try:
-                os.remove(temp_file)
+                os.unlink(temp_file)
             except:
                 pass
-                
-    return tmp_pdf.name
+        
+        return tmp_pdf.name
 
 def create_ppt(content):
     stories = content["stories"]

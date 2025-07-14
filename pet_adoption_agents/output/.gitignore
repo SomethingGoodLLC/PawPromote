@@ -1,0 +1,7 @@
+# Generated books and files
+*.pdf
+*.ppt
+*.pptx
+
+# Keep this directory structure
+!.gitignore

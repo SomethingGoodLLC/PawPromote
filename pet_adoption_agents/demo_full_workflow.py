@@ -74,64 +74,113 @@ async def simulate_data_fetcher(shelter_name: str, shelter_id: str, num_pets: in
     
     return pets
 
-async def simulate_content_generator(pets: List[Dict], humorous: bool = True):
-    """Simulate content generator with real image generation"""
-    print(f"\n🎨 Content Generator: Creating content for {len(pets)} pets (humorous={humorous})")
+async def simulate_content_generator(pets: List[Dict], humorous: bool = True) -> Dict:
+    """Simulate content_generator agent with real pet data"""
+    print("🤖 Content Generator: Starting content creation...")
+    mock_context = MockAgentContext()
     
-    context = MockAgentContext()
-    
-    # Note: This would normally call the actual content_generator function
-    # For demo purposes, we'll create mock content but show the structure
-    print("   📝 Generating humorous adventure stories...")
-    print("   📸 Using real Petfinder photos...")
-    print("   🎭 Creating story-specific images with GPT-Image-1...")
-    print("   🏆 Generating adoption badges...")
-    print("   🎬 Creating video content...")
-    
-    # Create realistic mock content structure
     content = {
         "stories": [],
         "images": [],
         "story_images": [],
         "badges": [],
-        "videos": []
+        "videos": [],
+        "petfinder_urls": []
     }
     
+    # Humorous adventure stories for each pet - structured
     story_templates = {
-        "Pepper": "Pepper, the mysterious black cat detective, spent her morning investigating the Case of the Missing Tuna. Using her independent spirit and quiet observation skills, she discovered the culprit was actually the neighbor's dog who had been sneaking treats through the fence. Now she's seeking a family who appreciates her investigative talents and doesn't mind her habit of leaving 'evidence' (toy mice) around the house as case files.",
-        
-        "Winnie": "Winnie, the distinguished Russian Blue, has established herself as the neighborhood's most refined socialite. She hosts weekly 'Whisker & Wisdom' gatherings where she shares life advice over premium water bowl cocktails. Her philosophy: 'Dignity is not negotiable, but cuddles are always welcome.' She's looking for a retirement home where she can continue her legacy as the most elegant feline philosopher in Alexandria.",
-        
-        "Zebra": "Zebra, the tuxedo cat with an identity crisis, has decided to become Alexandria's first feline ambassador. He greets every visitor with enthusiastic head bumps and purr-negotiations, convinced he's running for mayor. His campaign platform includes: mandatory belly rubs, extended nap times, and a treat in every bowl. He's seeking a family who will support his political aspirations and won't mind his campaign speeches at 3 AM.",
-        
-        "Rebekah": "Rebekah, the German Shepherd mix, has appointed herself as Alexandria's Chief Happiness Officer. She patrols the neighborhood spreading joy through enthusiastic tail wags and strategic treat distribution. Her daily schedule includes: morning security rounds, afternoon play therapy sessions, and evening snuggle consultations. She's looking for a family who needs a professional joy-bringer and doesn't mind her over-qualification for the position.",
-        
-        "Crouton": "Crouton, the golden food critic, has revolutionized the shelter's dining experience with his sophisticated palate and detailed meal reviews. His latest critique: 'The morning kibble shows remarkable consistency with hints of chicken and a satisfying crunch - 4.5 paws.' He's established a waiting list for his exclusive 'Dinner and a Movie' nights. He's seeking a family who appreciates fine dining and needs a professional taste-tester for all meals."
+        "Pepper": {
+            "header": "Pepper: Alexandria's Curious Detective 🕵️‍♀️",
+            "subheader": "Cracking cases, charming hearts.",
+            "paragraphs": [
+                "Meet Pepper, the mysterious black cat detective who has appointed herself as the neighborhood's Chief Security Officer. Her daily routine includes conducting thorough investigations of suspicious paper bags, interrogating dust bunnies, and filing detailed reports (by knocking things off tables).",
+                "Pepper's greatest case was 'The Mystery of the Disappearing Treats,' which she solved by catching the dog red-pawed. She's seeking a family who appreciates her investigative skills and doesn't mind her habit of leaving 'evidence' (toy mice) in shoes as case files."
+            ],
+            "badge": "Top Cat Detective 🔍",
+            "cta": "Ready to meet your new partner-in-crime-solving? Pepper awaits your companionship!"
+        },
+        "Winnie": {
+            "header": "Winnie: Alexandria's Elegant Philosopher 👑",
+            "subheader": "Wisdom, grace, and perfect naps.",
+            "paragraphs": [
+                "Winnie, the distinguished Russian Blue, has established herself as Alexandria's most refined feline socialite. At her age, she's mastered the art of dignified living and hosts daily 'Whisker & Wisdom' sessions where she shares life advice with younger cats.",
+                "Her philosophy: 'Naps are not optional, they're essential.' Winnie is looking for a retirement home where she can continue her legacy as the neighborhood's most elegant philosopher, preferably with a sunny windowsill and premium catnip service."
+            ],
+            "badge": "Certified Wisdom Keeper 🌟",
+            "cta": "Ready to learn from the master of sophisticated living? Winnie is accepting applications for her retirement home!"
+        },
+        "Zebra": {
+            "header": "Zebra: The Identity-Confused Greeter 🐾",
+            "subheader": "Part cat, part dog, all personality.",
+            "paragraphs": [
+                "Zebra, the tuxedo cat with a name that confuses everyone, has decided to embrace his identity crisis by becoming the shelter's official Welcome Committee of One. He greets every visitor with enthusiastic head bumps and purr-negotiations, convinced he's actually a dog trapped in a cat's body.",
+                "His daily schedule includes: morning tail-wagging practice, afternoon visitor greeting, and evening 'How to Be More Dog' workshops for confused cats. He's seeking a family who won't mind his existential crisis and will love his over-the-top personality."
+            ],
+            "badge": "Professional Greeter 🎉",
+            "cta": "Ready for a cat who thinks he's a dog? Zebra promises to greet you with enthusiasm every single day!"
+        },
+        "Rebekah": {
+            "header": "Rebekah: Chief Happiness Officer 🌈",
+            "subheader": "Professional tail-wagger and joy inspector.",
+            "paragraphs": [
+                "Rebekah, the German Shepherd mix, has appointed herself as Alexandria's Chief Happiness Officer and Professional Tail-Wagger. She takes her job seriously, conducting daily joy inspections throughout the neighborhood and organizing impromptu play sessions for anyone who looks remotely sad.",
+                "Her resume includes: Expert Treat Tester, Certified Good Girl, and Advanced Belly Rub Recipient. She's looking for a family who needs a professional happiness consultant and doesn't mind her over-enthusiasm for making everyone's day better."
+            ],
+            "badge": "Happiness Expert 😊",
+            "cta": "Need a professional happiness consultant? Rebekah is ready to make your every day brighter!"
+        },
+        "Crouton": {
+            "header": "Crouton: The Golden Food Critic 🍽️",
+            "subheader": "Dining experience coordinator and taste-tester extraordinaire.",
+            "paragraphs": [
+                "Crouton, the golden food critic, earned his name after a legendary incident involving a salad bar and his insatiable curiosity about human food. He's since become the shelter's official taste-tester and dining experience coordinator.",
+                "His latest review: 'The morning kibble shows remarkable consistency with hints of chicken and a robust crunch - 4.5 paws out of 5.' He's established a waiting list for his exclusive 'Dinner and a Movie' nights. Crouton is seeking a family who appreciates fine dining and needs a professional food quality inspector."
+            ],
+            "badge": "Master Food Critic 🏆",
+            "cta": "Ready for gourmet dining experiences? Crouton will elevate your meals to restaurant quality!"
+        }
     }
     
     for pet in pets:
         name = pet["name"]
         
-        # Add story
-        story = story_templates.get(name, f"{name} is looking for a wonderful family to share adventures with!")
-        content["stories"].append({"pet": name, "story": story})
+        # Add structured story
+        story_dict = story_templates.get(name, {
+            "header": f"{name}: Amazing Pet 🐾",
+            "subheader": "Looking for a loving home.",
+            "paragraphs": [f"{name} is an amazing {pet['type'].lower()} looking for a loving home!"],
+            "badge": "Great Pet 🌟",
+            "cta": f"Ready to meet {name}? Contact us today!"
+        })
+        content["stories"].append({"pet": name, "story": story_dict})
         
-        # Add real photo
+        # Simulate downloading and enhancing photo with GPT-Image-1
         if pet["photos"]:
+            raw_url = pet["photos"][0]
+            enhanced_url = raw_url.replace('.jpg', '_enhanced.jpg')  # Simulate enhancement
             content["images"].append({
-                "pet": name, 
-                "image_url": pet["photos"][0], 
-                "type": "real_photo"
+                "pet": name,
+                "image_url": enhanced_url,
+                "type": "gpt_enhanced_photo"
             })
+            print(f"   🎨 Enhanced photo for {name} with GPT-Image-1")
+        else:
+            content["images"].append({
+                "pet": name,
+                "image_url": f"https://placeholder.pet.photo/{name.lower()}.jpg",
+                "type": "placeholder"
+            })
+            print(f"   ⚠️ No photo for {name} - using placeholder")
         
-        # Add story-specific image (would be generated by GPT-Image-1)
+        # Add story-specific image
         content["story_images"].append({
             "pet": name,
             "image_url": f"https://generated-story-image.example.com/{name.lower()}_adventure.jpg",
             "type": "story_specific"
         })
         
-        # Add badge and video
+        # Add badges and videos
         content["badges"].append({
             "pet": name,
             "badge_url": f"https://generated-badge.example.com/{name.lower()}_badge.jpg"
@@ -140,8 +189,14 @@ async def simulate_content_generator(pets: List[Dict], humorous: bool = True):
             "pet": name,
             "video_url": f"https://generated-video.example.com/{name.lower()}_video.mp4"
         })
+        
+        # Add Petfinder URL
+        content["petfinder_urls"].append({
+            "pet": name,
+            "url": pet.get("url", "")
+        })
     
-    print(f"✅ Content Generator: Created content for {len(pets)} pets")
+    print(f"✅ Content Generator: Created enhanced content for {len(pets)} pets")
     return content
 
 async def simulate_asset_assembler(content: Dict, specification: str):
