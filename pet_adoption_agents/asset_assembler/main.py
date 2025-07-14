@@ -20,7 +20,7 @@ from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
 from reportlab.lib import colors
 from reportlab.lib.units import inch
 
-AGENT_JWT = "PLACEHOLDER_JWT"  # Replace with actual JWT after registration
+AGENT_JWT = os.getenv("AGENT_JWT", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI0MTljZTU3NS0yMTMyLTQ3YjctOWIzYy1lZjdlMWE3NmZiY2YiLCJleHAiOjI1MzQwMjMwMDc5OSwidXNlcl9pZCI6ImFjYjE5MDc1LWYwMzYtNDc3Mi05NTllLTI1NzZkNjAwODdmNSJ9.HwKMqQoWTKjtfVHv5-TGanyYoK53hsScHEAbY-SR840")
 session = GenAISession(jwt_token=AGENT_JWT)
 
 

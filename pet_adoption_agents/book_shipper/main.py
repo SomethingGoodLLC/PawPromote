@@ -35,7 +35,7 @@ LULU_SANDBOX = os.getenv("LULU_SANDBOX", "true").lower() == "true"
 if LULU_SANDBOX:
     LULU_API_BASE_URL = "https://api.sandbox.lulu.com"
 
-AGENT_JWT = os.getenv("AGENT_JWT", "PLACEHOLDER_JWT")
+AGENT_JWT = os.getenv("AGENT_JWT", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkMGZkMjQ4MC0yMTQxLTQxYTAtOGY0My05OTkwNTc3ZjY3MmEiLCJleHAiOjI1MzQwMjMwMDc5OSwidXNlcl9pZCI6ImFjYjE5MDc1LWYwMzYtNDc3Mi05NTllLTI1NzZkNjAwODdmNSJ9.IPtSYWAY7Qh8LM_1Q2egcA05AoeBBU60eSSkze3BiCk")
 session = GenAISession(jwt_token=AGENT_JWT)
 
 print(f"🚚 Book Shipper Agent initialized")

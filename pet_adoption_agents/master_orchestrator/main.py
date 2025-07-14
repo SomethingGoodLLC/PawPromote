@@ -25,7 +25,7 @@ try:
 except ImportError:
     pass
 
-AGENT_JWT = os.getenv("AGENT_JWT", "PLACEHOLDER_JWT")
+AGENT_JWT = os.getenv("AGENT_JWT", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJjNDgwODI1OS03Y2ViLTQxOWEtYTQ2Ni0yMjlkN2IyNGEwMmIiLCJleHAiOjI1MzQwMjMwMDc5OSwidXNlcl9pZCI6ImFjYjE5MDc1LWYwMzYtNDc3Mi05NTllLTI1NzZkNjAwODdmNSJ9.31xNxTxZ2TZbcdXWJ0nWaucHTqnsdz7WQwoGy_nhDHI")
 session = GenAISession(jwt_token=AGENT_JWT)
 
 # Agent endpoints for inter-agent communication

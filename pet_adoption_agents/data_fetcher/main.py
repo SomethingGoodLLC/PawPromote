@@ -1,15 +1,13 @@
 import asyncio
 import os
-import time
 from typing import Annotated, Any, List, Dict
 
 import requests
-import impala.dbapi as impala
 from bs4 import BeautifulSoup
 from genai_session.session import GenAISession
 from genai_session.utils.context import GenAIContext
 
-AGENT_JWT = "PLACEHOLDER_JWT"  # Replace with actual JWT after registration
+AGENT_JWT = os.getenv("AGENT_JWT", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2ZWQ0OTM1NS1jNzljLTRhZDAtOGIzYS1mMGI5ZTJiYmI1MDkiLCJleHAiOjI1MzQwMjMwMDc5OSwidXNlcl9pZCI6ImFjYjE5MDc1LWYwMzYtNDc3Mi05NTllLTI1NzZkNjAwODdmNSJ9.EX7gQXrRMFGdcZx_fTtxU4vLdmmyiXMGXAEiJ8dGL3Q")
 session = GenAISession(jwt_token=AGENT_JWT)
 
 PETFINDER_API_KEY = os.getenv("PETFINDER_API_KEY", "placeholder")
@@ -58,23 +56,7 @@ async def data_fetcher(
     return pets
 
 
-async def get_active_agents():
-    response = requests.get(
-        f"{BACKEND_URL}/api/agents/active",
-        headers={"X-API-KEY": AGENT_JWT},
-        params={"agent_type": "genai"},
-    )
-    if response.status_code == 200:
-        return response.json()["active_connections"]
-    else:
-        raise Exception(f"Failed to get active agents: {response.text}")
 
-
-def get_agent_id(agents: list[Dict[str, Any]], name: str) -> str:
-    for agent in agents:
-        if agent["name"] == name:
-            return agent["id"]
-    raise Exception(f"Agent {name} not found")
 
 
 @session.bind(
@@ -125,41 +107,9 @@ async def fetch_pets(
             "photos": photos
         })
 
-    # Cloudera Impala integration
-    host = os.getenv("IMPALA_HOST", "localhost")
-    port = int(os.getenv("IMPALA_PORT", "21050"))
-    conn = impala.connect(host=host, port=port)
-    cursor = conn.cursor()
-    pet_ids = [p["id"] for p in pets]
-    if pet_ids:
-        cursor.execute(f"SELECT id, name, description, photos, status FROM pet_data WHERE id IN ({','.join(map(str, pet_ids))})")
-        for row in cursor.fetchall():
-            for p in pets:
-                if p["id"] == row[0]:
-                    p["name"] = row[1]
-                    p["description"] = row[2]
-                    p["photos"] = row[3].split(',') if row[3] else []
-                    p["status"] = row[4]
-
-    # Setup real-time updates
-    last_fetch_time = time.time()
-    agents = await get_active_agents()
-    master_id = get_agent_id(agents, "master_orchestrator")
-
-    async def poll_updates():
-        nonlocal last_fetch_time
-        while True:
-            await asyncio.sleep(60)
-            cursor.execute(f"SELECT id, name, description, photos, status FROM pet_data WHERE last_updated > {last_fetch_time}")
-            updates = [dict(zip(["id", "name", "description", "photos", "status"], row)) for row in cursor.fetchall()]
-            for update in updates:
-                update["photos"] = update["photos"].split(',') if update["photos"] else []
-            if updates:
-                await session.send(client_id=master_id, message={"type": "pet_updates", "updates": updates})
-                last_fetch_time = time.time()
-
-    asyncio.create_task(poll_updates())
-
+    # Log successful fetch
+    agent_context.logger.info(f"Successfully fetched {len(pets)} pets from {shelter_name}")
+    
     return pets
 
 
