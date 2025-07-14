@@ -12,6 +12,7 @@ dependencies = [
   "python-pptx",
   "pillow",
   "google-cloud-aiplatform",
+  "impyla>=0.21.0",
 ]
 requires-python = ">=3.10"
 

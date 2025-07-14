@@ -1,7 +1,7 @@
 import asyncio
 import os
 import re
-from typing import Annotated, Any, Dict
+from typing import Annotated, Any, Dict, List
 
 import requests
 from genai_session.session import GenAISession
@@ -59,7 +59,7 @@ async def master_orchestrator(
     shipper_id = get_agent_id(agents, "book_shipper")
 
     # Step 1: Fetch pet data
-    fetcher_input = {"shelter_name": shelter_name, "shelter_id": shelter_id, "num_pets": num_pets}
+    fetcher_input = {"shelter_name": shelter_name, "shelter_id": shelter_id, "num_pets": num_pets, "include_photos": True}
     pets_response = await session.send(client_id=fetcher_id, message=fetcher_input)
     pets = pets_response.response
 
@@ -79,6 +79,18 @@ async def master_orchestrator(
     confirmation = shipping_response.response
 
     return {"status": "completed", "confirmation": confirmation}
+
+
+@session.bind(
+    name="pet_updates",
+    description="Receives pet data updates."
+)
+async def pet_updates(
+    agent_context: GenAIContext,
+    updates: Annotated[List[Dict[str, Any]], "List of updated pet data"]
+):
+    agent_context.logger.info(f"Received pet updates: {updates}")
+    # TODO: handle updates, perhaps trigger regeneration or notify
 
 
 async def main():

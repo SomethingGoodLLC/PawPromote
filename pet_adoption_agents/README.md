@@ -6,7 +6,7 @@ This project implements a multi-agent AI workflow using the GenAI AgentOS framew
 
 The workflow is orchestrated by a Master Agent that receives a plain text task (e.g., 'Promote 3 adoptable pets from ASPCA shelter NY114 with humorous adventure stories: Create a book, generate videos from real photos, and ship to donor at [address]') and coordinates 4 specialized agents:
 
-1. **Data Fetcher**: Retrieves pet data and photos from Petfinder API.
+1. **Data Fetcher**: Retrieves pet data and photos from Petfinder API with fallback website scraping for photos if not provided by API. Integrates with Cloudera Impala for real-time pet data updates (e.g., adoption status changes) via polling and sends updates to Master Orchestrator.
 2. **Content Generator**: Uses OpenAI (GPT, DALL-E, Sora placeholder) or Google Veo3 to generate stories, images, badges, and videos conditioned on real photos.
 3. **Asset Assembler**: Compiles content into books (PDF), presentations (PPT).
 4. **Book Shipper**: Ships physical books via Lulu API.
@@ -22,6 +22,8 @@ The agents are registered as GenAI Agents in the framework.
   - `PETFINDER_API_KEY` and `PETFINDER_API_SECRET` (from Petfinder.com)
   - `GOOGLE_PROJECT_ID` and `GOOGLE_LOCATION` (for Vertex AI / Veo3)
   - `LULU_API_KEY` (from Lulu.com developers)
+  - `IMPALA_HOST` (Cloudera Impala host, default: localhost)
+  - `IMPALA_PORT` (Cloudera Impala port, default: 21050)
 
 ## Setup
 
@@ -29,6 +31,7 @@ The agents are registered as GenAI Agents in the framework.
 2. For each agent subdirectory (e.g., `master_orchestrator/`):
    - `uv venv` (create virtual environment)
    - `uv sync` (install dependencies from pyproject.toml)
+   - For data_fetcher, additionally run `uv add impyla beautifulsoup4` if not already in pyproject.toml.
 3. Register agents using the CLI (from the repo's `cli/` directory):
    ```bash
    python cli.py register_agent --name master_orchestrator --description "Orchestrates the pet adoption promotion workflow by parsing tasks and calling specialized agents."
@@ -51,7 +54,7 @@ Invoke the master_orchestrator via the GenAI framework (e.g., through the fronte
 
 ## Notes
 - Sora API is a placeholder (not publicly available); falls back to Google Veo3.
-- Expand parsing logic in master_orchestrator for more complex tasks.
+- Expand parsing logic in master_orchestrator for more complex tasks and handling real-time updates from Data Fetcher.
 - Outputs (PDFs, PPTs, videos) are saved locally; shipping uses Lulu for physical books.
 
 For issues, refer to the main GenAI AgentOS repo or extend the agents as needed. 
